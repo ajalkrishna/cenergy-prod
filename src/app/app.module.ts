@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { ConsumptionCardComponent } from './consumption-card/consumption-card.component';
 import { LoginComponent } from './login/login.component';
 import { UsageComparisonComponent } from './usage-comparison/usage-comparison.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { UsageComparisonComponent } from './usage-comparison/usage-comparison.co
     UsageComponent,
     ConsumptionCardComponent,
     LoginComponent,
-    UsageComparisonComponent
+    UsageComparisonComponent,
+    LeaderboardComponent
   ],
   imports: [
     BrowserModule,

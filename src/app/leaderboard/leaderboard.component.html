@@ -1,0 +1,22 @@
+<div class="row w-100 mx-auto">
+    <div class="col">
+        <h5 class="fw-bold">Consumption Leaderboard</h5>
+        <table class="table table-bordered">
+            <thead class="thead">
+                <tr>
+                    <th>Rank</th>
+                    <th>Consumer Name</th>
+                    <th colspan="2">Consumption</th>
+                </tr>
+            </thead>
+            <tbody class="tbody">
+                <tr *ngFor="let each of peerConsumption;index as ind">
+                    <td>{{ind+1}}</td>
+                    <td>{{each.consumerName}}</td>
+                    <td>{{each.consumption}}</td>
+                    <td><i class="fa-solid fa-message"></i></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
