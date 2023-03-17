@@ -1,1 +1,36 @@
-<p>usage-comparison works!</p>
+<h5 class="fw-bold">Peak consumption tracking</h5>
+<hr class="text-primary mt-0 mb-2">
+<div class="row w-100 mx-auto">
+    <div class="col-6 p-3">
+        <div class="reading-slider">
+            <div class="progress" role="progressbar">
+                <div class="progress-bar"></div>
+            </div>
+            <div class="limit-zero">0</div>
+            <div class="limit-one">1</div>
+            <div class="limit-two">2</div>
+            <div class="acr-tab mt-4 d-flex justify-content-between">
+                <div class="acr-reading border-end pe-3">
+                    <p class="lead m-0 fw-bold">Average Consumption Rate</p>
+                    <h6>{{acr}}</h6>
+                </div>
+                <div class="legends">
+                    <div class="green">
+                        <h6><i class="fa-solid fa-square text-success"></i> Base consumption</h6>
+                    </div>
+                    <div class="yellow">
+                        <h6><i class="fa-solid fa-square text-warning"></i> Mid consumption</h6>
+                    </div>
+                    <div class="red">
+                        <h6><i class="fa-solid fa-square text-danger"></i> Peak consumption</h6>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+    <div class="col-6 border-start">
+        <canvas id="usageAround"></canvas>
+    </div>
+</div>

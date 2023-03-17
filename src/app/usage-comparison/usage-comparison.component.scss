@@ -1,0 +1,52 @@
+.progress {
+    border-radius: 0;
+    height: 1.5rem;
+    background: linear-gradient(90deg, rgba(58, 180, 66, 1) 15%, rgba(252, 182, 69, 1) 50%, rgba(253, 29, 29, 1) 100%);
+}
+
+.progress-bar {
+    width: 40%;
+    background-color: transparent;
+    border-right: 2px solid rgb(0, 0, 0);
+    // background: linear-gradient(90deg, rgba(58,180,66,1) 15%, rgba(252,182,69,1) 50%, rgba(253,29,29,1) 100%);   
+
+    // border-radius: 50px;
+}
+
+.reading-slider {
+    position: relative;
+
+    .limit-zero {
+        position: absolute;
+        left: 0%;
+        font-weight: bold;
+        font-size: 0.8rem;
+    }
+
+    .limit-one {
+        position: absolute;
+        left: 50%;
+        font-weight: bold;
+        font-size: 0.8rem;
+    }
+
+    .limit-two {
+        position: absolute;
+        left: 98%;
+        font-weight: bold;
+        font-size: 0.8rem;
+    }
+}
+
+.legends {
+    h6 {
+        font-size: 0.8rem;
+    }
+}
+
+.acr-reading {
+    p {
+        font-size: 1rem;
+
+    }
+}
