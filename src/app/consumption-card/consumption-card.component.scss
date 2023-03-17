@@ -1,0 +1,20 @@
+.card{
+    border: none;
+    border: 1px solid rgba(9, 148, 255, 0.856);
+    box-shadow: 0px 5px 5px rgba(188, 219, 248, 0.509);
+    
+    .card-body:hover{
+        background-color: rgba(188, 219, 248, 0.326);
+        transition: all 0.5s ease;
+    }
+
+
+    .fw-bold{
+        font-size: 1rem;
+        line-height: 0.5;
+    }
+    .lead{
+        font-size: 1rem;
+        margin: 0;
+    }
+}

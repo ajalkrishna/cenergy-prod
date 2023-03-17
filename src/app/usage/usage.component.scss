@@ -1,0 +1,149 @@
+.chart {
+    padding: 0rem 2rem;
+}
+
+.card-header {
+    background-color: rgb(49, 147, 251);
+
+    h4 {
+        color: white;
+        margin: 0;
+        font-size: 1.3rem;
+        // padding-top: ;
+    }
+}
+
+
+.btn {
+    border-radius: 0;
+    box-shadow: none;
+    background-color: rgba(199, 196, 196, 0.66);
+    color: black;
+}
+
+.btn:focus {
+    background-color: rgb(49, 147, 251);
+    color: white;
+
+}
+
+.chart_space {
+    min-height: 20rem;
+}
+
+.see-past-con {
+    cursor: pointer;
+    color: rgb(0, 115, 255);
+}
+
+.see-past-con:hover {
+    color: blue;
+
+    text-decoration: underline;
+}
+
+
+.alert_pop {
+    display: block;
+    font-size: 1rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: end;
+    padding: 0.5rem 1rem;
+    // box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.235);
+    border-left: 5px solid rgb(118, 90, 7);
+    background: rgba(236, 203, 15, 0.217);
+
+
+}
+
+.alert-line {
+    border: 1px solid black;
+    width: 3px;
+    height: 2rem;
+}
+
+.update-status {
+    font-size: 0.8rem;
+}
+
+
+.alert_pop {
+    animation: scale-up-tr 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@keyframes scale-up-tr {
+    0% {
+        transform: scale(0.5);
+        transform-origin: 100% 0%;
+    }
+
+    100% {
+        transform: scale(1);
+        transform-origin: 100% 0%;
+    }
+}
+
+.form-select {
+    border-radius: 0;
+    box-shadow: none;
+    // background-color: rgb(35 67 201);
+    border: 1px solid rgb(35 67 201);
+    // color: white;
+    box-shadow: 0px 5px 5px rgba(168, 168, 240, 0.128);
+}
+
+.btn-select {
+    // height: 100%;
+    border: 1px solid black;
+    padding: 0.3rem 0.6rem;
+    font-weight: bold;
+    background-color: rgb(80, 125, 247);
+    color: white;
+
+}
+
+.btn-select:hover {
+    transition: all 0.6s ease;
+    background-color: rgb(35 67 201);
+    color: white;
+}
+
+.fa-triangle-exclamation {
+    position: relative;
+    cursor: pointer;
+}
+
+.badge {
+    font-size: 0.5rem;
+    border-radius: 50%;
+    position: absolute;
+    top: -7px;
+    right: -6px;
+}
+
+.reading-show {
+    border-left: 2px solid rgb(26, 123, 243);
+
+}
+
+.modal-content {
+    border-radius: 0;
+    // background-color: rgb(244, 245, 254);
+
+    .modal-body {
+
+        .close-modal {
+            cursor: pointer;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .close-modal:hover {
+            transform: scale(1.05);
+        }
+
+        .pop-tip {
+            font-size: 0.8rem;
+        }
+    }
+}

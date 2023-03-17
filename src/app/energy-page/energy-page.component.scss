@@ -1,0 +1,72 @@
+.energy_page {
+    // min-height: 90vh;
+    margin-top: 1.5rem;
+}
+
+.account_card {
+    .card {
+        border: none;
+        box-shadow: 0px 5px 3px rgba(0, 0, 0, 0.126);
+
+        .row {
+            width: 100%;
+        }
+    }
+
+}
+
+.account_options {
+    ul {
+        list-style: none;
+
+        li {
+            padding-left: 0.7rem;
+            border-left: 1px solid grey;
+            color: grey;
+        }
+
+        li:nth-child(1) {
+            color: rgb(35 67 201);
+            border-left: 2px solid rgb(35 67 201);
+
+        }
+    }
+}
+
+hr {
+    margin: 2rem 0rem
+}
+
+.elec_sec {
+    padding: 2.4rem 0rem;
+    background-color: rgb(35 67 201);
+    border-bottom-left-radius: 0.4rem;
+    border-top-left-radius: 0.4rem;
+}
+
+.col-4 .lead {
+    font-size: 1rem;
+    // line-height: 0;
+}
+
+
+.col-3 .lead {
+    font-size: 1rem;
+    line-height: 1;
+}
+.tip_alert{
+    // min-height: 4rem;
+    width: 100%;
+    background-color: rgba(210, 219, 245, 0.208);
+    border: 1px solid rgb(35 67 201);
+    border-radius: 0.4rem;
+    padding: 1rem;
+    position: relative;
+
+}
+.tip_close_icon{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: red;
+}

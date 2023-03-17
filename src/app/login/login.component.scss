@@ -1,0 +1,34 @@
+.login_page{
+    padding-bottom: 0.5rem;
+    .image_space{
+        height: 30rem;
+        margin: auto;
+        display: block;
+        padding: 3rem;
+    }
+    background-size: cover;
+
+    .body{
+        .row{
+            // min-height: 88vh;
+        }
+        .login_template{
+            box-shadow: -5px -5px 20px rgba(190, 189, 189, 0.311);
+            padding: 4rem 1.5rem;
+            // border: 1px solid lightgray;
+            // border-radius: 25px;
+
+            .form-control{
+                box-shadow: none;
+                border-radius: 0;
+                background-color: rgba(211, 211, 211, 0.292);
+            }
+            .form-label{
+
+            }
+            .btn{
+                border-radius: 0;
+            }
+        }
+    }
+}

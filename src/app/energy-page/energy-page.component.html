@@ -1,0 +1,69 @@
+<app-header></app-header>
+<div class="energy_page">
+    <div class="container">
+        <div class="row">
+            <div class="col-3 side_nav">
+                <div class="d-flex align-items-center">
+                    <i class="fa-solid fa-chevron-left text-primary me-5"></i>
+                    <p class="text-primary m-0">Account</p>
+                </div>
+                <hr>
+                <div class="account_options">
+                    <h6 class="fw-bold" style="color: rgb(35 67 201);"><i
+                            class="fa-solid fa-lightbulb textt-primary"></i>Electricity account</h6>
+                    <ul>
+                        <li>Readings</li>
+                        <li>Billings</li>
+                        <li>Payments</li>
+                        <li>Moving primises</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="row mb-4 account_card">
+                    <div class="col">
+                        <div class="tip_alert mb-3 " *ngIf="showTip" (click)="hideTip()">
+                            <h6 class="fw-bold text-secondary"><i class="fa-regular fa-lightbulb text-warning"></i> Tip of the day</h6>
+                            <p class="m-0">Turn off lights when not required. Many automatic devices can help in saving energy used in lighting.</p>
+                            <div class="tip_close_icon">
+                                <i class="fa-solid fa-circle-xmark"></i>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body p-0">
+                                <div class="row mx-auto align-items-center">
+                                    <div class="col-2 elec_sec">
+                                        <div class="text-center">
+                                            <i class="fa-solid fa-lightbulb text-white"></i>
+                                            <h6 class="fw-bold text-white">Electricity</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <p class="lead fw-bold m-0 text-secondary">Site address:</p>
+                                        <p class=" m-0">Flat 29, Middlesex, UB2 4WLL</p>
+                                        <p class="text-primary m-0 mt-3"><i class="fa-solid fa-truck text-primary fw-bold"></i>
+                                            Moving premises</p>
+                                    </div>
+                                    <div class="col-3 border-end border-start">
+                                        <p class="text-center text-secondary fw-bold lead">Account Number</p>
+                                        <p class="text-center text-primary lead">XXX023480</p>
+                                    </div>
+                                    <div class="col-3">
+                                        <p class="text-center text-secondary fw-bold lead">Balance</p>
+                                        <p class="text-center text-primary lead">0.00</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row energy_card">
+                    <div class="col">
+                        <app-usage></app-usage>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

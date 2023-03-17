@@ -1,0 +1,119 @@
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center p-3">
+        <h4 class="fw-bold">Energy Usage</h4>
+        <i *ngIf="energyTabStatus" class="fa-regular fa-circle-xmark text-white fs-4" (click)="toggleEnergyTab()"></i>
+        <i *ngIf="!energyTabStatus" class="fa-solid fa-caret-down text-white fs-4" (click)="toggleEnergyTab()"></i>
+    </div>
+    <div class="card-body p-0">
+        <div class="basic_data border bg-light p-3" *ngIf="energyTabStatus">
+            <p class="m-0 pb-2"><span class="text-secondary fw-bold">Site address:</span>Flat 29, Middlesex, UB2 4WLL
+            </p>
+            <p class="m-0"><span class="text-secondary fw-bold">Meter Serial Number:</span>ASED-ADERC-9856-E453</p>
+        </div>
+        <div class="p-3" *ngIf="energyTabStatus">
+            <app-consumption-card></app-consumption-card>
+            <div class="d-flex justify-content-end pt-2">
+                <div class="see-past-con me-3" *ngIf="pastReadingToggle">
+                    Set half-hourly limit
+                </div>
+                <div class="see-past-con text-end" (click)="choosePastReadingsOption()" *ngIf="pastReadingToggle">
+                    See past consumption
+                </div>
+            </div>
+
+        </div>
+        <div class="chart_options" *ngIf="readingOption">
+            <form class="row w-100 justify-content-end mx-auto align-items-center" (submit)="chooseGraph($event)"
+                *ngIf="energyTabStatus">
+                <div class="col-2">
+                    <select name="year" class="form-select">
+                        <option>Year</option>
+                        <option [value]="year" *ngFor="let year of yearArray">{{year}}</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <select name="month" class="form-select">
+                        <option>Month</option>
+                        <option [value]="month.code" *ngFor="let month of monthArray">{{month.month}}</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <select name="date" class="form-select">
+                        <option>Date</option>
+                        <option [value]="date" *ngFor="let date of dateArray">{{date}}</option>
+                    </select>
+                </div>
+                <div class="col-3">
+                    <button type="submit" class="btn-select">Submit</button>
+                    <button type="reset" class="btn-select ms-2" (click)="resetGraph()">Reset</button>
+                    <i class="fa-solid fa-xmark ms-4 text-danger fs-4" (click)="choosePastReadingsOption()"></i>
+                </div>
+            </form>
+
+        </div>
+
+        <div class="chart_space mt-3">
+            <div class="chart">
+                <div class="row align-items-center">
+                    <div class="col-5 d-flex">
+                        <div>
+                            <h4 class="m-0 fw-bold">{{chosenReading.readingDate}}</h4>
+                            <p class="m-0 lead update-status">*last updated at {{listOfLabel[listOfLabel.length-1]}}</p>
+                        </div>
+                        <div class="reading-show ms-2 ps-2">
+                            <p class="m-0">Total Consumption</p>
+                            <h4 class="lead">{{dailyConsumption}}wh</h4>
+                        </div>
+
+                    </div>
+                    <div class="col-7 d-flex">
+                        <h5 class="ms-auto alert_pop" *ngIf="warningMessage"> You have consumed more units of power than
+                            yesterday!!
+                            <span (click)="closeWarning()"><i
+                                    class="fa-solid fa-circle-xmark text-danger ms-1"></i></span>
+                        </h5>
+                        <i class="fa-solid fa-triangle-exclamation text-warning fs-4 ms-auto" *ngIf="warningIcon"
+                            data-bs-toggle="modal" data-bs-target="#warningModal">
+                            <div class="badge bg-danger">1</div>
+
+                        </i>
+                    </div>
+                </div>
+                <canvas id="acquisitions"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="warningModal" data-bs-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-light">
+            <div class="modal-body p-4">
+                <h6 class="fw-bold">Dear Consumer,</h6>
+                <p>You have consumed <span class="fw-bold text-danger">{{excessUsage}}wh</span> more power than
+                    yesterday!!</p>
+                <table class="table w-75 text-center mx-auto table-bordered" *ngIf="excessConsumption.length!=0">
+                    <thead class="thead">
+                        <tr>
+                            <th colspan="2">Peak half-hourly consumption</th>
+                        </tr>
+                        <tr>
+                            <th>Time</th>
+                            <th>Consumption(Wh)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody">
+                        <tr *ngFor="let reading of excessConsumption">
+                            <td>{{reading.time}}</td>
+                            <td>{{reading.value}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="fst-italic pop-tip"><i class="fa-solid fa-exclamation text-danger"></i> Close your curtains in
+                    the evening to keep in heat when it's cold.</p>
+                <h6 class="text-danger close-modal" data-bs-dismiss="modal">Close</h6>
+            </div>
+        </div>
+    </div>
+</div>
