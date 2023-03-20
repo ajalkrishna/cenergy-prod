@@ -118,9 +118,8 @@ export class UsageComponent implements OnInit {
       type: 'line',
       data: {
         labels: this.listOfLabel,
-        // labels: ['a'],
         datasets: [{
-          label: 'Unit Of consumption',
+          label: 'Consumption',
           data: this.dataList,
           borderWidth: 2,
           pointBackgroundColor: 'rgba(255, 0, 0)',
@@ -139,15 +138,12 @@ export class UsageComponent implements OnInit {
               color: 'rgba(0,0,90)'
             },
             grid: {
-              // display:false,
-
-              // color: 'lightgrey',
               tickColor: 'rgba(0,0,90'
             },
             title: {
               color: 'darkblue',
               display: true,
-              text: 'Unit of consumption'
+              text: 'Consumption in Wh'
             },
             ticks: {
               stepSize: 3
@@ -167,7 +163,7 @@ export class UsageComponent implements OnInit {
             title: {
               color: 'darkblue',
               display: true,
-              text: 'Time of consumption'
+              text: 'Time of consumption (updating every 30 min)'
             },
             ticks: {
               // color:'red',

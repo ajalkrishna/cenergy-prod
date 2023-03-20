@@ -10,7 +10,12 @@
             <div class="limit-two">2</div>
             <div class="acr-tab mt-4 mb-1 d-flex justify-content-between">
                 <div class="acr-reading">
-                    <p class="lead m-0 fw-bold">Real-time ACR</p>
+                    <p class="lead m-0 fw-bold">
+                        Real-time ACR <i class="fa-solid fa-circle-info acr-info-icon" (click)="toggleAcrInfo()"></i>
+                    </p>
+                    <div class="acr-info bg-dark text-white p-1" *ngIf="showAcrInfo">Ratio between individual consumption and <br>
+                        divisional average consumption in a
+                        given period of time.</div>
                     <h6>{{acr}}</h6>
                 </div>
                 <div class="legends">
@@ -32,8 +37,8 @@
                     <p class="m-0" *ngIf="acr<1">Your ACR is less than 1. Keep maintaining</p>
                 </div>
                 <div *ngIf="isUnderPeak">
-                    <i class="fa-solid fa-circle-info fs-5" data-bs-toggle="modal"
-                    data-bs-target="#emailWarning"></i>
+                    <i class="fa-solid fa-circle-info fs-5 peakWarning" data-bs-toggle="modal"
+                        data-bs-target="#emailWarning"></i>
                 </div>
 
             </div>
@@ -49,7 +54,7 @@
                     <button class="btn btn-secondary w-100 ms-2">Download</button>
                 </div>
             </div>
-            <div class="recommendation text-white p-2" routerLink="/smart-configuration">
+            <div class="recommendation text-white p-3 mt-4" routerLink="/smart-configuration">
                 <h6>Smart Recommendation <i class="fa-solid fa-arrow-right"></i></h6>
                 <p class="m-0">Configure your electrical appliances directory and get personalized tips and
                     suggessions.</p>
@@ -59,7 +64,7 @@
     <div class="col-6 border-start">
         <p class="lead m-0 fw-bold mb-1">Peak Consumption Tracker</p>
         <canvas id="usageAround"></canvas>
-        <hr>
+        <!-- <hr> -->
         <div class="leaderboard">
             <app-leaderboard></app-leaderboard>
         </div>

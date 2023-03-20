@@ -1,22 +1,38 @@
-<div class="row w-100 mx-auto">
-    <div class="col">
-        <h5 class="fw-bold">Consumption Leaderboard</h5>
-        <table class="table table-bordered">
-            <thead class="thead">
-                <tr>
-                    <th>Rank</th>
-                    <th>Consumer Name</th>
-                    <th colspan="2">Consumption</th>
-                </tr>
-            </thead>
-            <tbody class="tbody">
-                <tr *ngFor="let each of peerConsumption;index as ind">
-                    <td>{{ind+1}}</td>
-                    <td>{{each.consumerName}}</td>
-                    <td>{{each.consumption}}</td>
-                    <td><i class="fa-solid fa-message"></i></td>
-                </tr>
-            </tbody>
-        </table>
+
+<div class="card">
+    <div class="card-body">
+        <div class="row align-items-center">
+            <div class="col-3">
+                <i class="fa-solid fa-shield"><span class="rank">6</span></i>
+            </div>
+            <div class="col-9">
+                <h5 class="yay m-0">Yay!</h5>
+                <p class="m-0">You are among top 10 consumers in your division.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="utility-news mt-2">
+    <div class="card">
+        <div class="card-body ">
+            <h6 class="heading fw-bold">What's happening around you</h6>
+            <hr>
+
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner bg-light">
+                  <div class="carousel-item active">
+                    Your Division is performing better in the past 2 weeks.
+                  </div>
+                  <div class="carousel-item">
+                    Your performance is better compared to average performance.
+                  </div>
+                  <div class="carousel-item">
+                    Utility is now performing well and gained profit in last week.
+                  </div>
+                </div>
+              </div>
+              <p class="m-0 text-primary text-end">show more</p>
+        </div>
     </div>
 </div>

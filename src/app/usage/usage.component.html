@@ -58,11 +58,11 @@
                     <div class="col-5 d-flex">
                         <div>
                             <h4 class="m-0 fw-bold">{{chosenReading.readingDate}}</h4>
-                            <p class="m-0 lead update-status">*last updated at {{listOfLabel[listOfLabel.length-1]}}</p>
+                            <p class="m-0 lead update-status text-primary fw-bold">*last updated at {{listOfLabel[listOfLabel.length-1]}}</p>
                         </div>
                         <div class="reading-show ms-2 ps-2">
                             <p class="m-0">Total Consumption</p>
-                            <h4 class="lead">{{dailyConsumption}}wh</h4>
+                            <h4 class="lead">{{dailyConsumption/10}}kWh</h4>
                         </div>
 
                     </div>
@@ -114,8 +114,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <p class="fst-italic pop-tip"><i class="fa-solid fa-exclamation text-danger"></i> Close your curtains in
-                    the evening to keep in heat when it's cold.</p>
+                <p class="fst-italic pop-tip">*above report has sent to your registered email-id</p>
                 <h6 class="text-danger close-modal" data-bs-dismiss="modal">Close</h6>
             </div>
         </div>

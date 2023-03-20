@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { offset } from '@popperjs/core';
 import { Chart, scales } from 'chart.js';
 
 @Component({
@@ -20,6 +19,7 @@ export class UsageComparisonComponent implements OnInit {
   counter: number = 0;
   comparisonBarChart: any;
   isUnderPeak: boolean = false;
+  showAcrInfo:boolean=false;
 
   ngOnInit(): void {
     this.makeChart();
@@ -56,6 +56,9 @@ export class UsageComparisonComponent implements OnInit {
       this.counter++;
     }, 4000)
   }
+  toggleAcrInfo(){
+    this.showAcrInfo=!this.showAcrInfo;
+  }
 
   makeChart() {
     this.comparisonBarChart = new Chart("usageAround", {
@@ -83,7 +86,7 @@ export class UsageComparisonComponent implements OnInit {
 
         scales: {
           x: {
-            stacked: true,
+            // stacked: true,
             grid: {
               display: false,
             },
@@ -96,7 +99,7 @@ export class UsageComparisonComponent implements OnInit {
 
           },
           y: {
-            stacked: true,
+            // stacked: true,
           }
         },
         plugins: {

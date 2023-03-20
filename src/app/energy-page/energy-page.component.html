@@ -22,12 +22,21 @@
             <div class="col-9">
                 <div class="row mb-4 account_card">
                     <div class="col">
-                        <div class="tip_alert mb-3 " *ngIf="showTip" (click)="hideTip()">
-                            <h6 class="fw-bold text-secondary"><i class="fa-regular fa-lightbulb text-warning"></i> Tip of the day</h6>
+                        <!-- <div class="tip_alert mb-3 " *ngIf="showTip" (click)="hideTip()">
+                            <h6 class="fw-bold"><i class="fa-regular fa-lightbulb text-danger"></i> Tip of the day</h6>
                             <p class="m-0">Turn off lights when not required. Many automatic devices can help in saving energy used in lighting.</p>
+                            <p class="m-0"></p>
                             <div class="tip_close_icon">
                                 <i class="fa-solid fa-circle-xmark"></i>
                             </div>
+                        </div> -->
+                        <div class="tip d-flex justify-content-between align-items-center">
+                            <p class="m-0">
+                                <img src="\assets\icons8-light-bulb-64.png" class="fa-lightbulb me-2" width="35px">
+                                Many automatic devices can help in saving energy used in lighting.
+                            </p>
+                            <button class="tip-button rounded-pill" routerLink="/smart-configuration">Configure Smart
+                                Suggessions <i class="fa-solid fa-arrow-right"></i></button>
                         </div>
                         <div class="card">
                             <div class="card-body p-0">
@@ -41,7 +50,8 @@
                                     <div class="col-4">
                                         <p class="lead fw-bold m-0 text-secondary">Site address:</p>
                                         <p class=" m-0">Flat 29, Middlesex, UB2 4WLL</p>
-                                        <p class="text-primary m-0 mt-3"><i class="fa-solid fa-truck text-primary fw-bold"></i>
+                                        <p class="text-primary m-0 mt-3"><i
+                                                class="fa-solid fa-truck text-primary fw-bold"></i>
                                             Moving premises</p>
                                     </div>
                                     <div class="col-3 border-end border-start">
