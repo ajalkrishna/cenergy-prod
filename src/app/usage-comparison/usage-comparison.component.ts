@@ -11,35 +11,68 @@ export class UsageComparisonComponent implements OnInit {
 
   constructor() { }
   progressBar: any;
-  acr:any=0;
+  acr: any = 0;
+  dacData = [150, 120, 180, 200, 160, 250, 230, 240, 260, 150, 120];
+  indData = [130, 100, 190, 230, 180, 260, 200, 260, 230, 120, 90];
+  peakData = [0.87, 0.83, 1.06, 1.15, 1.13, 1.04, 0.87, 0.884, 0.8, 0.75]
+  dacDataToShow: any[] = [100]
+  indDataToShow: any[] = [50]
+  counter: number = 0;
+  comparisonBarChart: any;
+  isUnderPeak: boolean = false;
 
   ngOnInit(): void {
     this.makeChart();
     this.progressBar = document.querySelector('.progress-bar');
 
-    setInterval(()=>{
-    this.progressBar.style.width='0%';
-    this.acr = Math.ceil(Math.random()*2*100)/100
-    this.progressBar.style.width=String((this.acr/2)*100)+'%';      
-    },3000)
+    let updatePeak = setInterval(() => {
+      if (this.counter == this.peakData.length) {
+        clearInterval(updatePeak);
+        return;
+      }
+      this.progressBar.style.width = '0%';
+      this.acr = this.peakData[this.counter];
+
+      this.progressBar.style.width = String((this.acr / 2) * 100) + '%';
+      if (this.acr > 1.1) {
+        this.isUnderPeak = true;
+      }
+    }, 4000)
+
+    let updateDac = setInterval(() => {
+      if (this.counter == this.dacData.length) {
+        clearInterval(updateDac);
+        return;
+      }
+      this.dacDataToShow = [];
+      this.indDataToShow = [];
+      this.dacDataToShow.push(this.dacData[this.counter])
+      this.indDataToShow.push(this.indData[this.counter])
+      this.comparisonBarChart.destroy();
+      this.makeChart();
+      console.log("say hekllo");
+      console.log(this.dacDataToShow);
+      console.log(this.indDataToShow);
+      this.counter++;
+    }, 4000)
   }
 
   makeChart() {
-    const comparisonPieChart = new Chart("usageAround", {
+    this.comparisonBarChart = new Chart("usageAround", {
       type: "bar",
       data: {
         labels: ['Real-time consumption'],
         datasets: [
           {
-            data: [100],
+            data: this.dacDataToShow,
             label: 'Divisional Average Consumption',
             backgroundColor: 'darkblue',
             barPercentage: 0.15,
 
           },
           {
-            data: [50],
-            label: 'Personal Consumption',
+            data: this.indDataToShow,
+            label: 'Individual Consumption',
             backgroundColor: 'blue',
             barPercentage: 0.15,
 
@@ -52,24 +85,24 @@ export class UsageComparisonComponent implements OnInit {
           x: {
             stacked: true,
             grid: {
-              display:false,
+              display: false,
             },
             border: {
               display: false
             },
-            ticks:{
-              color:'black',
+            ticks: {
+              color: 'black',
             }
-            
+
           },
           y: {
             stacked: true,
           }
         },
-        plugins:{
-          legend:{
-            position:'bottom',
-            align:'start'
+        plugins: {
+          legend: {
+            position: 'bottom',
+            align: 'start'
           }
         }
       }

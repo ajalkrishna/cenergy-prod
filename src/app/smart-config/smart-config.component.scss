@@ -1,0 +1,58 @@
+.smart-config{
+   
+    .footer{
+
+    }
+}
+.intro-section{
+    padding: 1.2rem;
+    background-color: white;
+    h5{
+        font-size: 2rem;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        color: darkblue;
+    }
+    p{
+        font-size: 1.1rem;
+    }
+    li{
+        font-size: 1rem;
+        font-weight: bold;
+    }
+}
+.form-section{
+    padding: 1.2rem;
+    background-color: white;
+    // .col-4{
+    //     border-right: 1px solid rgba(0, 0, 0, 0.281);
+    // }
+    label{
+        margin: 0;
+        font-weight: bold;
+        color: darkblue;
+        font-size: 0.9rem;
+    }
+    .form-select{
+        border-radius: 0;
+        box-shadow: none;
+        border: 1px solid darkblue;
+    }
+    button{
+        border-radius: 0;
+    }
+}
+.card{
+    border-radius: 0;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.137);
+    .card-body{
+        padding: 0.4rem 1rem;
+
+        h6{
+            font-weight: bold;
+        }
+        p{
+            font-size: 0.8rem;
+        }
+    }
+}

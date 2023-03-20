@@ -12,6 +12,9 @@ import { ConsumptionCardComponent } from './consumption-card/consumption-card.co
 import { LoginComponent } from './login/login.component';
 import { UsageComparisonComponent } from './usage-comparison/usage-comparison.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { SmartConfigComponent } from './smart-config/smart-config.component';
+import { MonthlyReportComponent } from './monthly-report/monthly-report.component';
+import { EmailWarningComponent } from './email-warning/email-warning.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
     ConsumptionCardComponent,
     LoginComponent,
     UsageComparisonComponent,
-    LeaderboardComponent
+    LeaderboardComponent,
+    SmartConfigComponent,
+    MonthlyReportComponent,
+    EmailWarningComponent
   ],
   imports: [
     BrowserModule,

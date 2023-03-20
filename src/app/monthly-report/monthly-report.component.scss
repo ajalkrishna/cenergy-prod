@@ -1,0 +1,20 @@
+ul{
+    line-height: 2rem;
+    li{
+        
+    }
+}
+.upcoming{
+    .estimated-consumption{
+        padding: 1rem;
+        border: 1px solid darkblue;
+        font-weight: bold;
+        background-color: rgba(210, 228, 252, 0.548);
+    }
+}
+.btn{
+    border-radius: 0;
+    box-shadow: none;
+    background-color: darkblue;
+    color: white;
+}

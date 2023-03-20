@@ -1,0 +1,87 @@
+<div class="smart-config">
+    <app-header></app-header>
+
+    <div class="body container mt-3">
+        <div class="intro-section">
+            <h5>Smart Recommendation</h5>
+            <p>Configure details of your household electrical appliances into application directory and get personalized
+                tips and suggestions. Which enables the following,</p>
+            <ul class="d-flex justify-content-between">
+                <li>More precise and practical suggessions</li>
+                <li>Quick action can be taken on electrical consumption</li>
+                <li>Improved awareness about electrical conservation</li>
+            </ul>
+        </div>
+
+        <div class="form-section mt-3 border pb-5">
+            <div class="row">
+                <h4 class="fw-bold">Configure New Appliance</h4>
+                <div class="col-4">
+                    <div class="options">
+                        <div class="mb-3">
+                            <label for="placeOfAction" class="form-label">Place of action</label>
+                            <select name="placeOfAction" id="placeOfAction" class="form-select"
+                                (input)="choosePlaceOfAction($event)">
+                                <option>Select...</option>
+                                <option *ngFor="let room of configOptions.placeOfAction">{{room}}</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="applianceName" class="form-label">Appliance Name</label>
+                            <select name="applianceName" id="applianceName" class="form-select"
+                                (input)="chooseAppliance($event)">
+                                <option>Select...</option>
+                                <option *ngFor="let appliance of configOptions.appliances">{{appliance}}</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="timeOfUse" class="form-label">Time of use</label>
+                            <div class="d-flex">
+                                <select name="timeOfUse" id="timeOfUse" class="form-select me-2"
+                                    (input)="chooseTimeOfUseFrom($event)">
+                                    <option>From</option>
+                                    <option *ngFor="let time of configOptions.timeOfUse">{{time}}</option>
+                                </select>
+                                <select name="timeOfUse" id="timeOfUse" class="form-select"
+                                    (input)="chooseTimeOfUseTo($event)">
+                                    <option>To</option>
+                                    <option *ngFor="let time of configOptions.timeOfUse">{{time}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="priority" class="form-label">Priority</label>
+                            <select name="priority" id="priority" class="form-select" (input)="choosePriority($event)">
+                                <option>Select...</option>
+                                <option *ngFor="let priority of configOptions.priority">{{priority}}</option>
+                            </select>
+                        </div>
+                        <button type="reset" class="btn btn-primary w-100" (click)="configureNewAppliance()">Configure
+                            Appliance</button>
+                    </div>
+                </div>
+                <div class="col-8 bg-light p-4">
+                    <div class="row row-cols-1 row-cols-lg-3 g-3">
+                        <div class="col" *ngFor="let appliance of configuredAppliances">
+                            <div class="card">
+                                <div class="card-body d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="m-0">{{appliance.applianceName}}</h6>
+                                        <p class="m-0">{{appliance.placeOfAction}}</p>
+                                    </div>
+                                    <i class="fa-solid fa-ellipsis-vertical fs-5"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Button trigger modal -->
+    <!-- Modal -->
+    <div class="footer">
+        <app-footer></app-footer>
+    </div>
+</div>

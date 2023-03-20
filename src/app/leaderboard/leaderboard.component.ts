@@ -35,26 +35,31 @@ export class LeaderboardComponent implements OnInit {
     },
   ]
   updatedArray: any[] = []
-  consumptionArray: any[] = []
+  consumptionArray: any[] = [];
+  rankUpdate:any;
   constructor() { }
 
   ngOnInit(): void {
-    setInterval(()=>{
+    this.rankUpdate = setInterval(()=>{
       this.updateRanking()
-
-    },2000)
+    },3000)
   }
 
   updateRanking() {
     this.consumptionArray=[];
     this.updatedArray=[];
     for (const each of this.peerConsumption) {
-      each.consumption+=Math.ceil(Math.random()*5)
+      each.consumption+=Math.ceil(Math.random()*10)
       this.consumptionArray.push(each.consumption)
     }
     
     for (let i = 0; i < this.consumptionArray.length; i++) {
-      let reading = this.consumptionArray.sort()[i]    
+      let reading = this.consumptionArray.sort()[i];
+      let close = this.peerConsumption.filter((each) => each.consumption == reading);
+      if(close.length>1){
+        clearInterval(this.rankUpdate);
+        return;
+      }
       let update = this.peerConsumption.find((each) => each.consumption == reading);
       this.updatedArray.push(update);
     }
