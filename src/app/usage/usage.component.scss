@@ -13,20 +13,6 @@
     }
 }
 
-
-.btn {
-    border-radius: 0;
-    box-shadow: none;
-    background-color: rgba(199, 196, 196, 0.66);
-    color: black;
-}
-
-.btn:focus {
-    background-color: rgb(49, 147, 251);
-    color: white;
-
-}
-
 .chart_space {
     min-height: 20rem;
 }
@@ -108,19 +94,7 @@
     color: white;
 }
 
-.fa-triangle-exclamation {
-    position: relative;
-    cursor: pointer;
-}
 
-.badge {
-    font-size: 0.5rem;
-    border-radius: 50%;
-    position: absolute;
-    top: -7px;
-    right: -6px;
-    color: black;
-}
 
 .reading-show {
     border-left: 2px solid rgb(26, 123, 243);
@@ -146,5 +120,34 @@
         .pop-tip {
             font-size: 0.8rem;
         }
+    }
+}
+
+.warninBtn{
+    background-color: rgb(208, 2, 2);
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0;
+    box-shadow: none;
+}
+.warninBtn:hover{
+    background-color: red;
+}
+.consumptionChart{
+    position: relative;
+}
+.thresholdLine{
+    width: 86%;
+    height: 2px;
+    background-color: rgba(1, 1, 201, 0.68);
+    position: absolute;
+    top: 6.3em;
+    right: 1.7rem;
+    // z-index: 100;
+    font-size: 0.9rem;
+    .fa-pen{
+        font-size: 0.8rem;
     }
 }

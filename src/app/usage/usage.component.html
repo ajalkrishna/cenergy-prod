@@ -72,14 +72,17 @@
                             <span (click)="closeWarning()"><i
                                     class="fa-solid fa-circle-xmark text-danger ms-1"></i></span>
                         </h5>
-                        <i class="fa-solid fa-triangle-exclamation text-danger fs-4 ms-auto" *ngIf="warningIcon"
-                            data-bs-toggle="modal" data-bs-target="#warningModal">
-                            <div class="badge bg-warning">1</div>
+                            <button class="btn warninBtn d-block ms-auto" *ngIf="warningIcon"
+                            data-bs-toggle="modal" data-bs-target="#warningModal">Important Notification <i class="fa-solid fa-triangle-exclamation"></i></button>
 
-                        </i>
+                        <!-- </i> -->
                     </div>
                 </div>
-                <canvas id="acquisitions"></canvas>
+                <div class="consumptionChart">
+                    <canvas id="acquisitions"></canvas>
+                    <div class="thresholdLine text-end">Threshold<i class="fa-regular fa-pen-to-square ms-2"></i></div>
+                </div>
+                
             </div>
         </div>
 

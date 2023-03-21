@@ -119,7 +119,7 @@ export class UsageComponent implements OnInit {
       data: {
         labels: this.listOfLabel,
         datasets: [{
-          label: 'Consumption',
+          label: 'Consumption (kWh)',
           data: this.dataList,
           borderWidth: 2,
           pointBackgroundColor: 'rgba(255, 0, 0)',
@@ -143,7 +143,7 @@ export class UsageComponent implements OnInit {
             title: {
               color: 'darkblue',
               display: true,
-              text: 'Consumption in Wh'
+              text: 'Consumption in kWh'
             },
             ticks: {
               stepSize: 3
