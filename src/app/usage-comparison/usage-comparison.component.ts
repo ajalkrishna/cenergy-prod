@@ -37,7 +37,7 @@ export class UsageComparisonComponent implements OnInit {
       if (this.acr > 1.1) {
         this.isUnderPeak = true;
       }
-    }, 4000)
+    }, 3000)
 
     let updateDac = setInterval(() => {
       if (this.counter == this.dacData.length) {
@@ -54,7 +54,7 @@ export class UsageComparisonComponent implements OnInit {
       console.log(this.dacDataToShow);
       console.log(this.indDataToShow);
       this.counter++;
-    }, 4000)
+    }, 3000)
   }
   toggleAcrInfo(){
     this.showAcrInfo=!this.showAcrInfo;
@@ -68,16 +68,16 @@ export class UsageComparisonComponent implements OnInit {
         datasets: [
           {
             data: this.dacDataToShow,
-            label: 'Divisional Average Consumption',
+            label: 'Area/Zone Average Consumption',
             backgroundColor: 'darkblue',
-            barPercentage: 0.15,
+            barPercentage: 0.3,
 
           },
           {
             data: this.indDataToShow,
             label: 'Individual Consumption',
             backgroundColor: 'blue',
-            barPercentage: 0.15,
+            barPercentage: 0.3,
 
           }
         ]

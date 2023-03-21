@@ -31,8 +31,32 @@
     padding: 1rem;
     font-size: 0.9rem;
 }
-.heading{
+
+.heading {
     background-color: rgb(35 67 201);
     color: white;
     padding: 0.8rem;
+}
+
+.showMoreBtn {
+    background-color: rgb(35 67 201);
+    color: white;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 0;
+}
+
+.modal {
+    .heading {
+        background-color: rgba(6, 51, 230, 0.792);
+        color: white;
+    }
+
+    .latest-news{
+        // box-shadow: 0px 0px 5px rgba(164, 162, 162, 0.151);
+        p {
+            // font-weight: bold;
+            font-family: 'Times New Roman', Times, serif;
+        }
+    }
 }

@@ -72,9 +72,9 @@
                             <span (click)="closeWarning()"><i
                                     class="fa-solid fa-circle-xmark text-danger ms-1"></i></span>
                         </h5>
-                        <i class="fa-solid fa-triangle-exclamation text-warning fs-4 ms-auto" *ngIf="warningIcon"
+                        <i class="fa-solid fa-triangle-exclamation text-danger fs-4 ms-auto" *ngIf="warningIcon"
                             data-bs-toggle="modal" data-bs-target="#warningModal">
-                            <div class="badge bg-danger">1</div>
+                            <div class="badge bg-warning">1</div>
 
                         </i>
                     </div>
@@ -95,7 +95,7 @@
         <div class="modal-content bg-light">
             <div class="modal-body p-4">
                 <h6 class="fw-bold">Dear Consumer,</h6>
-                <p>You have consumed <span class="fw-bold text-danger">{{excessUsage}}wh</span> more power than
+                <p>You have consumed <span class="fw-bold text-danger">{{excessUsage/10}}kWh</span> more electricity than
                     yesterday!!</p>
                 <table class="table w-75 text-center mx-auto table-bordered" *ngIf="excessConsumption.length!=0">
                     <thead class="thead">

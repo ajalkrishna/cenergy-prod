@@ -1,36 +1,52 @@
-
 <div class="card">
-    <div class="card-body">
-        <div class="row align-items-center">
-            <div class="col-3">
-                <i class="fa-solid fa-shield"><span class="rank">6</span></i>
-            </div>
-            <div class="col-9">
-                <h5 class="yay m-0">Yay!</h5>
-                <p class="m-0">You are among top 10 consumers in your division.</p>
-            </div>
-        </div>
+  <div class="card-body">
+    <div class="row align-items-center justify-content-center">
+      <div class="col-3">
+        <i class="fa-solid fa-shield"><span class="rank">6</span></i>
+      </div>
+      <div class="col-9">
+        <h5 class="yay m-0">Yay!</h5>
+        <p class="m-0">You are among top 10 consumers in your Area/Zone.</p>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="utility-news mt-2">
-    <div class="card">
-        <div class="card-body ">
-            <h6 class="heading fw-bold">What's happening around you</h6>
-            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    Your Division is performing better in the past 2 weeks.
-                  </div>
-                  <div class="carousel-item">
-                    Your performance is better compared to average performance.
-                  </div>
-                  <div class="carousel-item">
-                    Utility is now performing well and gained profit in last week.
-                  </div>
-                </div>
-              </div>
-              <p class="m-0 text-primary text-end">show more</p>
+  <div class="card">
+    <div class="card-body ">
+      <h6 class="heading fw-bold">What's happening around you</h6>
+      <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            Your area/zone is performing better in the past 2 weeks.
+          </div>
+          <div class="carousel-item">
+            Your performance is better compared to average performance.
+          </div>
+          <div class="carousel-item">
+            Utility is now performing well and gained profit in last week.
+          </div>
         </div>
+      </div>
+      <button type="button" class="btn showMoreBtn d-block ms-auto" data-bs-toggle="modal" data-bs-target="#showMoreNews">Show More</button>
+
     </div>
+  </div>
+</div>
+
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="showMoreNews" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body p-4">
+        <h6 class="fw-bold heading mb-4">What's happening around you</h6>
+        <div class="latest-news border bg-light mb-3" *ngFor="let news of latestNews">
+          <p class="m-0 p-2">{{news}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

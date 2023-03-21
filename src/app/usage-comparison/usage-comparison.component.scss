@@ -101,3 +101,40 @@
     top: -1.4rem;
     right: -12.5rem;
 }
+.main-heading{
+    background-color: rgb(35 67 201);
+    color: white;
+    padding: 0.5rem;
+}
+.acr-note{
+    background-color: rgb(192, 221, 247);
+    // border: 1px solid darkblue;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.8rem;
+}
+.baseConsumption{
+    
+    font-size: 0.9rem;
+    background-color: lightgreen;
+    border: 3px solid green;
+    padding: 1rem 0.4rem;
+    
+}
+.peakConsumption{
+    font-size: 0.9rem;
+    background-color: #ff2a26ca;
+    border: 3px solid red;
+    padding: 0.4rem;
+    color: white;
+    li{
+        font-weight: bold;
+    }
+    .showMoreTip{
+        background-color: white;
+        color: red;
+        font-size: 0.8rem;
+        border-radius: 0;
+        padding: 0.2rem 0.4rem;
+
+    }
+}

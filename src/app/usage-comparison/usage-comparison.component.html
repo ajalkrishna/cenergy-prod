@@ -1,68 +1,45 @@
 <div class="row w-100 mx-auto">
+    <h5 class="fw-bold text-center main-heading mb-3">Your performance against neighbourhood</h5>
     <div class="col-6 ps-3 pe-3">
-        <p class="lead m-0 fw-bold pb-2">Average Consumption Rate (ACR)</p>
-        <div class="reading-slider">
-            <div class="progress" role="progressbar">
-                <div class="progress-bar"></div>
-            </div>
-            <div class="limit-zero">0</div>
-            <div class="limit-one">1</div>
-            <div class="limit-two">2</div>
-            <div class="acr-tab mt-4 mb-1 d-flex justify-content-between">
-                <div class="acr-reading">
-                    <p class="lead m-0 fw-bold">
-                        Real-time ACR <i class="fa-solid fa-circle-info acr-info-icon" (click)="toggleAcrInfo()"></i>
-                    </p>
-                    <div class="acr-info bg-dark text-white p-1" *ngIf="showAcrInfo">Ratio between individual consumption and <br>
-                        divisional average consumption in a
-                        given period of time.</div>
-                    <h6>{{acr}}</h6>
-                </div>
-                <div class="legends">
-                    <div class="green">
-                        <h6><i class="fa-solid fa-square text-success"></i> Base consumption</h6>
-                    </div>
-                    <div class="yellow">
-                        <h6><i class="fa-solid fa-square text-warning"></i> Mid consumption</h6>
-                    </div>
-                    <div class="red">
-                        <h6><i class="fa-solid fa-square text-danger"></i> Peak consumption</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="info d-flex justify-content-between align-items-center pb-3">
-                <div>
-                    <h6 class="text-danger m-0 fw-bold">Info</h6>
-                    <p class="m-0" *ngIf="acr>1">Reduce electricity consumption.</p>
-                    <p class="m-0" *ngIf="acr<1">Your ACR is less than 1. Keep maintaining</p>
-                </div>
-                <div *ngIf="isUnderPeak">
-                    <i class="fa-solid fa-circle-info fs-5 peakWarning" data-bs-toggle="modal"
-                        data-bs-target="#emailWarning"></i>
-                </div>
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <p class="lead m-0 fw-bold pb-2">How I'm performing?</p>
+            <i class="fa-solid fa-circle-info fs-6" data-bs-toggle="modal" data-bs-target="#acrInfo"></i>
+        </div>
+        <p class="acr-note m-0">Your current ACR is <span class="fw-bold">{{acr}}</span></p>
 
+        <div *ngIf="!isUnderPeak" class="mt-2 mb-2">
+            <p class="m-0 baseConsumption">Great!!<br>You performed well in the last hour. Keep consuming less. </p>
+        </div>
+
+        <div *ngIf="isUnderPeak" class=" peakConsumption mt-2 mb-2">
+            <p class="m-0">You are under peak consumption!! Follow below tips.</p>
+            <ul class="mt-2">
+                <li>You have 2 less priority lamps in the out-door, turn off and save 1 unit.</li>
+            </ul>
+            <button class="btn showMoreTip d-block ms-auto" data-bs-toggle="modal"
+            data-bs-target="#emailWarning">Read More</button>
+
+        </div>
+        <hr>
+        <div class="monthly-report mb-3">
+            <h6 class="fw-bold report_heading">Monthly Report</h6>
+            <p class="m-0">Your current month consumption report along with upcoming month's consumption estimation
+                document
+                has released.</p>
+            <div class="buttons d-flex mt-2">
+                <button class="btn btn-primary w-100" data-bs-toggle="modal"
+                    data-bs-target="#monthlyReport">View</button>
+                <button class="btn btn-secondary w-100 ms-2">Download</button>
             </div>
-            <hr>
-            <div class="monthly-report mb-3">
-                <h6 class="fw-bold report_heading">Monthly Report</h6>
-                <p class="m-0">Your current month consumption report along with upcoming month's consumption estimation
-                    document
-                    has released.</p>
-                <div class="buttons d-flex mt-2">
-                    <button class="btn btn-primary w-100" data-bs-toggle="modal"
-                        data-bs-target="#monthlyReport">View</button>
-                    <button class="btn btn-secondary w-100 ms-2">Download</button>
-                </div>
-            </div>
-            <div class="recommendation text-white p-3 mt-4" routerLink="/smart-configuration">
-                <h6>Smart Recommendation <i class="fa-solid fa-arrow-right"></i></h6>
-                <p class="m-0">Configure your electrical appliances directory and get personalized tips and
-                    suggessions.</p>
-            </div>
+        </div>
+        <div class="recommendation text-white p-3 mt-4" routerLink="/smart-configuration">
+            <h6>Smart Recommendation <i class="fa-solid fa-arrow-right"></i></h6>
+            <p class="m-0">Configure your electrical appliances directory and get personalized tips and
+                suggessions.</p>
         </div>
     </div>
     <div class="col-6 border-start">
-        <p class="lead m-0 fw-bold mb-1">Peak Consumption Tracker</p>
+        <p class="lead m-0 fw-bold mb-1">You v/s Neighbourhood</p>
         <canvas id="usageAround"></canvas>
         <!-- <hr> -->
         <div class="leaderboard">
@@ -88,6 +65,55 @@
         <div class="modal-content">
             <div class="modal-body">
                 <app-email-warning></app-email-warning>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="acrInfo" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p class="lead m-0 fw-bold mb-2">Average Consumption Rate (ACR)</p>
+                <div class="reading-slider">
+                    <div class="progress" role="progressbar">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <div class="limit-zero">0</div>
+                    <div class="limit-one">1</div>
+                    <div class="limit-two">2</div>
+                    <div class="acr-tab mt-4 mb-1 d-flex justify-content-between">
+                        <div class="acr-reading">
+                            <p class="lead m-0 fw-bold">
+                                Real-time ACR <i class="fa-solid fa-circle-info acr-info-icon"
+                                    (click)="toggleAcrInfo()"></i>
+                            </p>
+                            <div class="acr-info bg-dark text-white p-1" *ngIf="showAcrInfo">Ratio between individual
+                                consumption and <br>
+                                divisional average consumption in a
+                                given period of time.</div>
+                            <h6>{{acr}}</h6>
+                        </div>
+                        <div class="legends">
+                            <div class="green">
+                                <h6><i class="fa-solid fa-square text-success"></i> Base consumption</h6>
+                            </div>
+                            <div class="yellow">
+                                <h6><i class="fa-solid fa-square text-warning"></i> Mid consumption</h6>
+                            </div>
+                            <div class="red">
+                                <h6><i class="fa-solid fa-square text-danger"></i> Peak consumption</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info d-flex justify-content-between align-items-center pb-3">
+                        <div>
+                            <h6 class="text-danger m-0 fw-bold">Info</h6>
+                            <p class="m-0" *ngIf="acr>1">Reduce electricity consumption.</p>
+                            <p class="m-0" *ngIf="acr<1">Your ACR is less than 1. Keep maintaining</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
