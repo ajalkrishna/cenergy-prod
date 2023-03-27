@@ -1,0 +1,46 @@
+<div class="monitor-page mt-4 p-3">
+    <h4 class="fw-bold">Realtime Appliances Monitoring System</h4>
+    <div class="row row-cols-1 row-cols-lg-3 three-cards">
+        <div class="col mt-2" *ngFor="let appliance of applianceOverview">
+            <div class="card" [class]="appliance.color">
+                <div class="card-body d-flex justify-content-between">
+                    <h5 class="heading">{{appliance.heading}}</h5>
+                    <h5 class="count">{{appliance.count}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="choose-room mt-4">
+        <h6 class="m-0 fw-bold">Monitor Individual Appliance</h6>
+
+        <div class="select mt-2">
+            <div class="row">
+                <div class="col-3">
+                    <select class="form-select">
+                        <option selected>Select Floor</option>
+                        <option *ngFor="let floor of floors">{{floor}}</option>
+                    </select>
+                </div>
+                <div class="col-3">
+                    <select class="form-select" (input)="chooseRoom($event)">
+                        <option selected>Select Room</option>
+                        <option *ngFor="let room of placeOfAction">{{room}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <hr>
+
+        <div class="row w-100 mx-auto row-cols-1 row-cols-lg-4 p-3 bg-light appliances-cards">
+            <div class="col mt-2" *ngFor="let appliance of appliancesToShow">
+                <div class="card">
+                    <div class="card-body d-flex justify-content-between">
+                        <h5 class="heading p-0">{{appliance.name}}</h5>
+                        <h5 [class]="appliance.status">{{appliance.status}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

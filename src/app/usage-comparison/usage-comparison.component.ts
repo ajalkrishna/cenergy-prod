@@ -60,6 +60,8 @@ export class UsageComparisonComponent implements OnInit {
   isUnderPeak: boolean = false;
   showAcrInfo:boolean=false;
 
+  showNotification:boolean=true;
+
   ngOnInit(): void {
     this.makeChart();
     this.progressBar = document.querySelector('.progress-bar');
@@ -90,11 +92,12 @@ export class UsageComparisonComponent implements OnInit {
       this.indDataToShow.push(this.indData[this.counter])
       this.comparisonBarChart.destroy();
       this.makeChart();
-      console.log("say hekllo");
-      console.log(this.dacDataToShow);
-      console.log(this.indDataToShow);
       this.counter++;
     }, 3000)
+
+    setInterval(()=>{
+    this.showNotification=!this.showNotification;
+    },500)
   }
   toggleAcrInfo(){
     this.showAcrInfo=!this.showAcrInfo;

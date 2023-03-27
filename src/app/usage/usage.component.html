@@ -1,22 +1,22 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center p-3">
         <h4 class="fw-bold">Energy Usage</h4>
-        <i *ngIf="energyTabStatus" class="fa-regular fa-circle-xmark text-white fs-4" (click)="toggleEnergyTab()"></i>
-        <i *ngIf="!energyTabStatus" class="fa-solid fa-caret-down text-white fs-4" (click)="toggleEnergyTab()"></i>
+        <i *ngIf="energyTabStatus" class="fa-solid fa-chevron-up text-white fs-4" (click)="toggleEnergyTab()"></i>
+        <i *ngIf="!energyTabStatus" class="fa-solid fa-chevron-down text-white fs-4" (click)="toggleEnergyTab()"></i>
     </div>
     <div class="card-body p-0">
         <div class="basic_data border bg-light p-3" *ngIf="energyTabStatus">
-            <p class="m-0 pb-2"><span class="text-secondary fw-bold">Site address:</span>Flat 29, Middlesex, UB2 4WLL
+            <p class="m-0 pb-2"><span class="text-secondary fw-bold">Site address: </span> Flat 29, Middlesex, UB2 4WLL
             </p>
-            <p class="m-0"><span class="text-secondary fw-bold">Meter Serial Number:</span>ASED-ADERC-9856-E453</p>
+            <p class="m-0"><span class="text-secondary fw-bold">Meter Serial Number: </span> ASED-ADERC-9856-E453</p>
         </div>
         <div class="p-3" *ngIf="energyTabStatus">
             <app-consumption-card></app-consumption-card>
             <div class="d-flex justify-content-end pt-2">
-                <div class="see-past-con me-3" *ngIf="pastReadingToggle">
-                    Set half-hourly limit
+                <div class="see-past-con me-3 text-decoration-underline" *ngIf="pastReadingToggle">
+                    Set Threshold
                 </div>
-                <div class="see-past-con text-end" (click)="choosePastReadingsOption()" *ngIf="pastReadingToggle">
+                <div class="see-past-con text-end text-decoration-underline" (click)="choosePastReadingsOption()" *ngIf="pastReadingToggle">
                     See past consumption
                 </div>
             </div>
@@ -62,7 +62,7 @@
                         </div>
                         <div class="reading-show ms-2 ps-2">
                             <p class="m-0">Total Consumption</p>
-                            <h4 class="lead">{{dailyConsumption/10}}kWh</h4>
+                            <h4 class="lead">{{dailyConsumption}}kWh</h4>
                         </div>
 
                     </div>
@@ -98,7 +98,7 @@
         <div class="modal-content bg-light">
             <div class="modal-body p-4">
                 <h6 class="fw-bold">Dear Consumer,</h6>
-                <p>You have consumed <span class="fw-bold text-danger">{{excessUsage/10}}kWh</span> more electricity than
+                <p>You have consumed <span class="fw-bold text-danger">{{excessUsage}}kWh</span> more electricity than
                     yesterday!!</p>
                 <table class="table w-75 text-center mx-auto table-bordered" *ngIf="excessConsumption.length!=0">
                     <thead class="thead">
@@ -107,7 +107,7 @@
                         </tr>
                         <tr>
                             <th>Time</th>
-                            <th>Consumption(Wh)</th>
+                            <th>Consumption(kWh)</th>
                         </tr>
                     </thead>
                     <tbody class="tbody">

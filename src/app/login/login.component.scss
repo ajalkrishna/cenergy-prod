@@ -1,35 +1,67 @@
-.login_page{
-    background-image: url('../../assets/back.png');
+.login_page {
+    background-image: url('../../assets/back.jpg');
     background-size: cover;
-    .display-6{
+    min-height: 100vh;
+
+    .display-6 {
         font-family: 'Raleway', sans-serif;
     }
-    .header{
-        background-color: rgba(0, 0, 0, 0.183);
 
-    }
-
-    .body{
-        .row{
+    .body {
+        .row {
             min-height: 86vh;
         }
-        .login_template{
-            padding: 3rem 1.5rem;
-            // border: 1px solid lightgray;
-             background-color: rgba(0, 0, 0, 0.183);
-             color: white;
 
-            .form-control{
+        .login_template {
+            padding: 2rem 1.8rem 4rem 1.8rem;
+            background-color: rgb(255, 255, 255);
+            color: black;
+            border-radius: 1.5rem;
+
+            .form-control {
                 box-shadow: none;
-                border-radius: 0;
-                background-color: rgba(211, 211, 211, 0.292);
-                color: white;
+                padding: 0.6rem 0.5rem;
             }
-            .form-label{
+            .form-control::placeholder{
+                font-size: 0.9rem;
+            }
+            .terms{
+                
+                font-size: 0.8rem;
+                span{
+                    cursor: pointer;
+                }
+            }
+            .forgot{
+                font-size: 0.8rem;
+                color: rgb(55, 2, 179);
+                cursor: pointer;
+            }
 
+            .welcome {
+                .text{
+                    color: rgb(55, 2, 179);
+                    font-size: 2rem;
+                    font-family: 'Times New Roman', Times, serif;
+                    font-weight: bold;
+                }
+                .lead{
+                    font-size: 0.9rem;
+                }
             }
-            .btn{
-                border-radius: 0;
+
+            .btn {
+                box-shadow: none;
+                width: 50%;
+                background-color: rgb(41,110, 241);
+                color: white;
+                font-weight: bold;
+                text-align: start;
+
+                .fa-right-long{
+                    color: white;
+                    margin-left: 2rem;
+                }
             }
         }
     }

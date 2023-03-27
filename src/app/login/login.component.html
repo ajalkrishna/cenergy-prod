@@ -1,34 +1,32 @@
 <div class="login_page">
-    <div class="header">
-        <div class="container d-flex justify-content-between align-items-center p-3">
-            <div class="display-6 text-white">Cenergy</div>
-            <h6 class="m-0 text-white">Home</h6>
+    <div class="header pt-4">
+        <div class="container">
+            <div class="display-6 text-white"><i class="fa-solid fa-fire-flame-curved text-white"></i> Cenergy</div>
         </div>
 
     </div>
     <div class="body">
         <div class="row w-100 align-items-center justify-content-center">
-            <div class="col-3 login_template">
-                <div class="mb-3">
-                    <h3 class="text-center fw-bold">Login</h3>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label fw-bold">Email id</label>
-                    <input type="text" name="emailId" class="form-control" placeholder="johndoe@mail.com"/>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label fw-bold">Password</label>
-                    <input type="password" name="password" class="form-control"/>
-                    <p class="m-0 text-white">Forgot Password?</p>
-                </div>
-                <div class="mb-3">
-                    <button class="btn btn-light rounded-pill text-dark d-block mx-auto" routerLink="/energy-usage">Submit</button>
-                </div>
-            </div>
             <div class="col-6 ">
             </div>
+            <div class="col-3 login_template">
+                <div class="welcome">
+                    <p class="m-0 text">Welcome Back...</p>
+                    <p class="lead">Please enter your email and password</p>
+                </div>
+                <div class="mb-3">
+                    <input type="text" name="emailId" class="form-control" placeholder="user@mail.com"/>
+                </div>
+                <div class="mb-3">
+                    <input type="password" name="password" class="form-control mb-2" placeholder="Password"/>
+                    <p class="m-0 terms">By login, you agree to our <span class="text-primary text-decoration-underline">Terms & Conditions</span></p>
+                </div>
+                <div class=" d-flex justify-content-between align-items-center">
+                    <button class="btn" routerLink="/energy-usage">Submit <i class="fa-solid fa-right-long"></i></button>
+                    <div class="forgot">Forgot Password?</div>
+                </div>
+            </div>
+            
         </div>
     </div>
-
-    <!-- <app-footer></app-footer> -->
 </div>

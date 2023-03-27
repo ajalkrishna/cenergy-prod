@@ -1,0 +1,36 @@
+<div class="feedback-box text-center">
+    <i class="fa-solid fa-xmark modal-close" data-bs-dismiss="modal"></i>
+    <div class="p-3 mt-2">
+        <ng-content></ng-content>
+        <div class="emoji d-flex justify-content-evenly">
+            <button class="btn btn-primary"><i class="fa-solid fa-face-grin-wide"></i>
+                <p class="text-dark">Excellent</p>
+            </button>
+            <button class="btn btn-primary"><i class="fa-solid fa-face-smile"></i>
+                <p class="text-dark">Good</p>
+            </button>
+            <button class="btn btn-primary"><i class="fa-solid fa-face-meh"></i>
+                <p class="text-dark">Medium</p>
+            </button>
+            <button class="btn btn-primary"><i class="fa-solid fa-face-frown"></i>
+                <p class="text-dark">Poor</p>
+            </button>
+            <button class="btn btn-primary"><i class="fa-solid fa-face-angry"></i>
+                <p class="text-dark">Very Bad</p>
+            </button>
+
+        </div>
+        <div class="remarks">
+            <textarea class="form-control" placeholder="Tell us why..."></textarea>
+        </div>
+    </div>
+
+    <div class="footer d-flex justify-content-between bg-light p-3">
+        <div class="dont-show d-flex align-items-center">
+            <input type="checkbox" class="form-check m-0 me-2">
+            <p class="m-0">Don't show this again</p>
+        </div>
+        <button class="btn btn-primary fw-bold" data-bs-dismiss="modal" (click)="closeModal()">Submit</button>
+    </div>
+
+</div>

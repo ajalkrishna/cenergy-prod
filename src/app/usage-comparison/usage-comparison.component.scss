@@ -54,6 +54,7 @@
 }
 .report_heading{
     font-size: 1.1rem;
+    position: relative;
 }
 .monthly-report{
     .btn{
@@ -139,4 +140,9 @@
         padding: 0.2rem 0.4rem;
 
     }
+}
+.notification{
+    position: absolute;
+    left: 33%;
+    top: -8%;   
 }

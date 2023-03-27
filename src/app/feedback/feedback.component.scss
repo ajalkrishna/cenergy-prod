@@ -1,0 +1,85 @@
+.header{
+    h6{
+        font-size: 1.2rem;
+    }
+    p{
+        font-size: 0.9rem;
+    }
+}
+
+.emoji{
+    .fa-face-grin-wide{
+        color: green;
+    }
+    .fa-face-smile{
+        color: rgb(136, 255, 0);
+    }
+    .fa-face-meh{
+        color: rgb(255, 191, 0);
+    }
+    .fa-face-frown{
+        color: rgb(255, 98, 0);
+    }
+    .fa-face-angry{
+        color: red;
+    }
+    i{
+        font-size: 2.5rem;
+        // color: rgb(108, 108, 108);
+    }
+    i:hover{
+        transform: scale(1.05);
+        // color: rgb(173, 0, 0);
+    }
+    button{
+        background-color: transparent;
+        border: none;
+
+        p{
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 0.2rem;
+        }
+    }
+    button:focus{
+        i{
+            color: black;
+            padding: 0.2rem;
+            border-radius: 50%;
+            border: 1px solid black;
+        }
+    }
+}
+
+.footer{
+    button{
+        border-radius: 0;
+        box-shadow: none;
+        font-size: 0.8rem;
+        padding: 0.3rem 1rem;
+    }
+}
+.remarks{
+    padding: 0rem 1rem;
+    .form-control{
+        box-shadow: none;
+        background-color: rgba(225, 225, 225, 0.151);
+        border-radius: 0;
+    }
+    textarea::placeholder{
+        font-size: 0.9rem;
+        padding: 0.2rem;
+    }
+}
+.feedback-box{
+    position: relative;
+
+    .modal-close{
+        position: absolute;
+        right: 1rem;
+        top: 0.5rem;
+        color: red;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+}

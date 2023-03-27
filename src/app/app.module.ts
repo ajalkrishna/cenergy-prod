@@ -15,6 +15,9 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { SmartConfigComponent } from './smart-config/smart-config.component';
 import { MonthlyReportComponent } from './monthly-report/monthly-report.component';
 import { EmailWarningComponent } from './email-warning/email-warning.component';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { NetZeroComponent } from './net-zero/net-zero.component';
+import { MonitoringComponent } from './monitoring/monitoring.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { EmailWarningComponent } from './email-warning/email-warning.component';
     LeaderboardComponent,
     SmartConfigComponent,
     MonthlyReportComponent,
-    EmailWarningComponent
+    EmailWarningComponent,
+    FeedbackComponent,
+    NetZeroComponent,
+    MonitoringComponent
   ],
   imports: [
     BrowserModule,

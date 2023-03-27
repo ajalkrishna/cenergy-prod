@@ -22,21 +22,14 @@
             <div class="col-9">
                 <div class="row mb-4 account_card">
                     <div class="col">
-                        <!-- <div class="tip_alert mb-3 " *ngIf="showTip" (click)="hideTip()">
-                            <h6 class="fw-bold"><i class="fa-regular fa-lightbulb text-danger"></i> Tip of the day</h6>
-                            <p class="m-0">Turn off lights when not required. Many automatic devices can help in saving energy used in lighting.</p>
-                            <p class="m-0"></p>
-                            <div class="tip_close_icon">
-                                <i class="fa-solid fa-circle-xmark"></i>
-                            </div>
-                        </div> -->
                         <div class="tip d-flex justify-content-between align-items-center">
                             <p class="m-0">
                                 <img src="\assets\icons8-light-bulb-64.png" class="fa-lightbulb me-2" width="35px">
-                                Many automatic devices can help in saving energy used in lighting.
+                                Close your curtains in the evening to keep in heat when it's cold.
                             </p>
                             <button class="tip-button rounded-pill" routerLink="/smart-configuration">Configure Smart
-                                Suggessions <i class="fa-solid fa-arrow-right"></i></button>
+                                Recommendations</button>
+
                         </div>
                         <div class="card">
                             <div class="card-body p-0">
@@ -67,6 +60,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="net-zero mb-3">
+                    <app-net-zero></app-net-zero>
+                </div>
                 <div class="row energy_card">
                     <div class="col">
                         <app-usage></app-usage>
@@ -76,4 +72,21 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="myModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <app-feedback>
+                    <div class="header">
+                        <h6 class="text-center fw-bold">How you are feeling today?</h6>
+                        <p class="lead text-center">Tell us how your day is going</p>
+                    </div>
+                </app-feedback>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <app-footer></app-footer>

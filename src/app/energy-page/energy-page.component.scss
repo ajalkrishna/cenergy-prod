@@ -88,12 +88,6 @@ hr {
     }
 }
 
-.tip_close_icon {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    color: red;
-}
 
 .tip-button {
     border: none;
@@ -103,4 +97,24 @@ hr {
     box-shadow: 0px 2px 5px rgba(18, 18, 18, 0.779);
     font-size: 0.9rem;
     font-weight: bold;
+}
+.tip-button:hover{
+    background-color: rgb(252, 241, 230);
+
+}
+.modal-content{
+    border-radius: 0;
+    padding: 0;
+
+    .modal-body{
+        padding: 0;
+    }
+}
+.header{
+    h6{
+        font-size: 1.2rem;
+    }
+    p{
+        font-size: 0.9rem;
+    }
 }

@@ -2,16 +2,16 @@
     <h5 class="fw-bold text-center main-heading mb-3">My consumption against neighbourhood</h5>
     <div class="col-6 ps-3 pe-3">
         <div class="d-flex justify-content-between align-items-center mb-2">
-            <p class="lead m-0 fw-bold pb-2">How I'm performing?</p>
+            <p class="lead m-0 fw-bold pb-2">How I'm performing at peak hour?</p>
             <i class="fa-solid fa-circle-info fs-6" data-bs-toggle="modal" data-bs-target="#acrInfo"></i>
         </div>
-        <p class="acr-note m-0">Your Average Consumption Rate (ACR) <br> for {{acrTime}} is <span class="fw-bold">{{acr}}</span></p>
+        <p class="acr-note m-0">Your Average Consumption Rate (ACR) <br> for 4PM to 6PM is <span class="fw-bold">1.2</span></p>
 
-        <div *ngIf="!isUnderPeak" class="mt-2 mb-2">
+        <!-- <div *ngIf="!isUnderPeak" class="mt-2 mb-2">
             <p class="m-0 baseConsumption">Great!!<br>You performed well in the last hour. Keep consuming less. </p>
-        </div>
+        </div> -->
 
-        <div *ngIf="isUnderPeak" class=" peakConsumption mt-2 mb-2">
+        <div class=" peakConsumption mt-2 mb-2">
             <p class="m-0">You are under peak consumption!! Follow below tips.</p>
             <ul class="mt-2">
                 <li>You have 2 less priority lamps in the out-door, turn off and save 1 unit.</li>
@@ -22,7 +22,7 @@
         </div>
         <hr>
         <div class="monthly-report mb-3">
-            <h6 class="fw-bold report_heading">Monthly Report</h6>
+            <h6 class="fw-bold report_heading">Monthly Report<i class="fa-solid fa-circle-info notification text-danger" *ngIf="showNotification"></i><i class="fa-solid fa-circle-info notification text-success" *ngIf="!showNotification"></i></h6>
             <p class="m-0">Your current month consumption report along with upcoming month's consumption estimation
                 document
                 has released.</p>

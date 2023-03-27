@@ -24,7 +24,7 @@ export class ConsumptionCardComponent implements OnInit {
     },
     {
       heading:'Last 1 Day Consumption',
-      value:'23.6kWh'
+      value:'236kWh'
     },
 
   ]

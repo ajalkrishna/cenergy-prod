@@ -7,9 +7,13 @@
     </div>
     <div class="main_header bg-light pt-3 pb-3">
         <div class="container d-flex justify-content-between  align-items-center">
-            <p class="display-6 m-0">Cenergy</p>
-            <div class="user ">
-                <p class="fw-bold m-0">Test User <i class="fa-solid fa-user"></i></p>
+            <p class="display-6 m-0"><i class="fa-solid fa-fire-flame-curved "></i> Cenergy</p>
+            <div class="user">
+                <div class="d-flex align-items-center">
+                    <p class="fw-bold m-0 me-2" routerLink="/login" data-bs-toggle="modal"
+                    data-bs-target="#logoutFeedback" (click)="clearSession()">Logout</p>
+                    <p class="fw-bold m-0"><i class="fa-solid fa-user"></i></p>
+                </div>
             </div>
         </div>
     </div>
@@ -25,7 +29,7 @@
                         <i class="fa-regular text-white fa-lightbulb"></i>
                         <div class="lh-0 ms-2">
                             <h6 class="dp">Electricity</h6>
-                            <h6 class="dp">1213453xxxx</h6>
+                            <h6 class="dp">XXX023480</h6>
                         </div>
                     </div>
                     <i class="fa-solid fa-caret-down text-white"></i>
@@ -34,6 +38,21 @@
                     <h6 class="text-white manage_btn m-0">Manage <i class="fa-regular fa-note-sticky"></i>
                     </h6>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="logoutFeedback" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <app-feedback>
+                    <div class="header">
+                        <h6 class="text-center fw-bold">How'd the session go?</h6>
+                        <p class="lead text-center">Tell us your experiance in the last session </p>
+                    </div>
+                </app-feedback>
             </div>
         </div>
     </div>
