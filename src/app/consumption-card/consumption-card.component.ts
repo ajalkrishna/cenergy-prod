@@ -14,7 +14,7 @@ export class ConsumptionCardComponent implements OnInit {
   dataToBeDisplayed=[
     {
       heading:'Last 30 Days Consumption',
-      value:'5800kWh'
+      value:'5500kWh'
 
     },
     {

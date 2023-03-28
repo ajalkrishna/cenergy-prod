@@ -84,6 +84,8 @@ export class UsageComponent implements OnInit {
       code: '12'
     },
   ];
+  yesterdayData: number[] = [1.9, 2, 2, 2, 1.9, 2.1, 1.9, 1.9, 1.9, 1.9, 1.8, 6.2, 6.8, 7.7, 7.6, 8.6, 8.6, 9.6, 9.8, 9.6, 9.8, 9.9, 10.2, 10.2, 10.7, 8.9, 8.7, 9, 9, 8.5, 8.7, 8.2, 5, 4, 3.9, 3.9, 3.9, 4.1, 3.9, 4, 4, 4, 3.9, 3.9, 3.9, 3.9, 3.9, 3.9];
+
   excessConsumption: any[] = [];
   pastReadingToggle: boolean = true;
   totalThreshold: number = 236;
@@ -120,7 +122,7 @@ export class UsageComponent implements OnInit {
       data: {
         labels: this.listOfLabel,
         datasets: [{
-          label: 'Consumption (kWh)',
+          label: this.chosenReading.readingDate,
           data: this.dataList,
           borderWidth: 2,
           pointBackgroundColor: 'rgba(255, 0, 0)',
@@ -165,23 +167,19 @@ export class UsageComponent implements OnInit {
               color: 'darkblue',
               display: true,
               text: 'Time of consumption (updating every 30 min)'
-            },
-            ticks: {
-              // color:'red',
-              // callback: function(val, index) {
-              //   // Hide every 2nd tick label
-              //   return index % 6 === 0 ? this.getLabelForValue(index) : '';
-              // },
             }
           }
         },
         animation: false,
-        layout: {
-          padding: 30
-        },
         plugins: {
           legend: {
-            display: false
+            display: true,
+            align:"end",
+            labels:{
+              boxHeight:2,
+              boxWidth:30,
+              color:'black'
+            }
           },
           tooltip: {
             // enabled:false
@@ -191,7 +189,24 @@ export class UsageComponent implements OnInit {
             borderWidth: 1,
             borderColor: '#000',
             mode: 'index',
-            intersect: false
+            boxHeight:1,
+            boxPadding:2,
+            padding:4,
+            intersect: false,
+
+            callbacks: {
+              label: function (context) {
+                let label = context.dataset.label || '';
+
+                if (label) {
+                  label += ': ';
+                }
+                if (context.parsed.y !== null) {
+                  label += context.parsed.y+"kWh";
+                }
+                return label;
+              }
+            }
           }
         }
 
@@ -212,7 +227,8 @@ export class UsageComponent implements OnInit {
     if (data[id] > 9) {
       let consumption = {
         time: labels[id],
-        value: data[id]
+        value: data[id],
+        excess:(data[id]-9).toFixed(1)
       }
       this.excessConsumption.push(consumption)
     }
@@ -289,6 +305,25 @@ export class UsageComponent implements OnInit {
 
   toggleEnergyTab() {
     this.energyTabStatus = !this.energyTabStatus;
+  }
+
+
+  showYesterday(e) {
+    if(e.target.checked){
+      let yesterdayDataset = {
+        label: '29-08-2019',
+        data: this.yesterdayData,
+        borderWidth: 2,
+        pointStyle: false,
+        borderColor: 'rgba(226, 181, 2, 0.902)',
+        cubicInterpolationMode: 'monotone',
+      }
+    this.chart.data.datasets.push(yesterdayDataset)
+    }
+    else{
+      this.chart.data.datasets.pop();
+    }
+    this.chart.update();
   }
 
 }

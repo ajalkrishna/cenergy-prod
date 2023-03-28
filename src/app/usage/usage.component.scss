@@ -139,15 +139,20 @@
     position: relative;
 }
 .thresholdLine{
-    width: 86%;
+    width: 94%;
     height: 2px;
-    background-color: rgba(1, 1, 201, 0.68);
+    background-color: rgba(1, 1, 201, 0.516);
     position: absolute;
-    top: 6.3em;
-    right: 1.7rem;
+    top: 6.4rem;
+    right: 0rem;
     // z-index: 100;
     font-size: 0.9rem;
     .fa-pen{
         font-size: 0.8rem;
+    }
+}
+.warning-table{
+    thead th{
+        font-size: 0.9rem;
     }
 }

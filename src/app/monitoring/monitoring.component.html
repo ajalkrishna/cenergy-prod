@@ -35,8 +35,12 @@
             <div class="col mt-2" *ngFor="let appliance of appliancesToShow">
                 <div class="card">
                     <div class="card-body d-flex justify-content-between">
+                        <div>
                         <h5 class="heading p-0">{{appliance.name}}</h5>
-                        <h5 [class]="appliance.status">{{appliance.status}}</h5>
+                            <p class="m-0 status" *ngIf="appliance.status=='ON'">Active from last 1 hr</p>
+                            <p class="m-0 status" *ngIf="appliance.status=='OFF'">Last used 1 hr before</p>
+                        </div>
+                        <h5 [class]="appliance.status" >{{appliance.status}}</h5>
                     </div>
                 </div>
             </div>

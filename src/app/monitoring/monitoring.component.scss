@@ -2,17 +2,12 @@
     background-color: white;
     h4{
         color: rgb(7, 7, 148);
-        // font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         font-family: Arial, Helvetica, sans-serif;
-
         font-size: 1.8rem;
     }
     .three-cards {
-
         .card {
             color: white;
-
-            // font-weight: bold;
             .card-body {
                 padding: 0.8rem 1.2rem;
 
@@ -52,13 +47,17 @@
     .appliances-cards {
         .card {
             color: black;
-            // border-radius: 50px;
             border-radius: 0;
 
             .card-body {
                 padding: 0.8rem 1.2rem;
                 h5 {
                     margin: 0;
+                }
+                .status{
+                    font-size: 0.7rem;
+                    color: rgba(0, 0, 255, 0.856);
+                    font-weight: bold;
                 }
             }
 
@@ -72,6 +71,7 @@
                 font-size: 0.8rem;
                 background-color: green;
                 padding: 0.4rem;
+                align-items: center;
 
             }
             .OFF{

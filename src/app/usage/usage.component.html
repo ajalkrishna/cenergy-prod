@@ -13,10 +13,18 @@
         <div class="p-3" *ngIf="energyTabStatus">
             <app-consumption-card></app-consumption-card>
             <div class="d-flex justify-content-end pt-2">
+
+                <div class="see-past-con me-3 d-flex" *ngIf="pastReadingToggle">
+                    <input type="checkbox" class="form-check me-2" (input)="showYesterday($event)">
+                    <p class="m-0">Compare with yesterday</p>
+                </div>
+
+
                 <div class="see-past-con me-3 text-decoration-underline" *ngIf="pastReadingToggle">
                     Set Threshold
                 </div>
-                <div class="see-past-con text-end text-decoration-underline" (click)="choosePastReadingsOption()" *ngIf="pastReadingToggle">
+                <div class="see-past-con text-end text-decoration-underline" (click)="choosePastReadingsOption()"
+                    *ngIf="pastReadingToggle">
                     See past consumption
                 </div>
             </div>
@@ -58,7 +66,8 @@
                     <div class="col-5 d-flex">
                         <div>
                             <h4 class="m-0 fw-bold">{{chosenReading.readingDate}}</h4>
-                            <p class="m-0 lead update-status text-primary fw-bold">*last updated at {{listOfLabel[listOfLabel.length-1]}}</p>
+                            <p class="m-0 lead update-status text-primary fw-bold">*last updated at
+                                {{listOfLabel[listOfLabel.length-1]}}</p>
                         </div>
                         <div class="reading-show ms-2 ps-2">
                             <p class="m-0">Total Consumption</p>
@@ -72,17 +81,15 @@
                             <span (click)="closeWarning()"><i
                                     class="fa-solid fa-circle-xmark text-danger ms-1"></i></span>
                         </h5>
-                            <button class="btn warninBtn d-block ms-auto" *ngIf="warningIcon"
-                            data-bs-toggle="modal" data-bs-target="#warningModal">Important Notification <i class="fa-solid fa-triangle-exclamation"></i></button>
-
-                        <!-- </i> -->
+                        <button class="btn warninBtn d-block ms-auto" data-bs-toggle="modal"
+                            data-bs-target="#warningModal" *ngIf="warningIcon">Important Notification <i
+                                class="fa-solid fa-triangle-exclamation"></i></button>
                     </div>
                 </div>
                 <div class="consumptionChart">
                     <canvas id="acquisitions"></canvas>
                     <div class="thresholdLine text-end">Threshold<i class="fa-regular fa-pen-to-square ms-2"></i></div>
                 </div>
-                
             </div>
         </div>
 
@@ -98,22 +105,26 @@
         <div class="modal-content bg-light">
             <div class="modal-body p-4">
                 <h6 class="fw-bold">Dear Consumer,</h6>
-                <p>You have consumed <span class="fw-bold text-danger">{{excessUsage}}kWh</span> more electricity than
+                <p class="m-0 mt-2">You have consumed <span class="fw-bold text-danger">{{excessUsage}}kWh</span> more
+                    electricity than
                     yesterday!!</p>
-                <table class="table w-75 text-center mx-auto table-bordered" *ngIf="excessConsumption.length!=0">
+                <table class="table mt-3 text-center mx-auto table-bordered warning-table"
+                    *ngIf="excessConsumption.length!=0">
                     <thead class="thead">
                         <tr>
-                            <th colspan="2">Peak half-hourly consumption</th>
+                            <th colspan="3">Half-hourly consumption exceeded threshold (9kWh) </th>
                         </tr>
                         <tr>
                             <th>Time</th>
                             <th>Consumption(kWh)</th>
+                            <th>Excess Consumption(kWh)</th>
                         </tr>
                     </thead>
                     <tbody class="tbody">
                         <tr *ngFor="let reading of excessConsumption">
                             <td>{{reading.time}}</td>
                             <td>{{reading.value}}</td>
+                            <td>{{reading.excess}}</td>
                         </tr>
                     </tbody>
                 </table>
