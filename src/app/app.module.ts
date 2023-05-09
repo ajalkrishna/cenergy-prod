@@ -18,6 +18,7 @@ import { EmailWarningComponent } from './email-warning/email-warning.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { NetZeroComponent } from './net-zero/net-zero.component';
 import { MonitoringComponent } from './monitoring/monitoring.component';
+import { TariffComponent } from './tariff/tariff.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { MonitoringComponent } from './monitoring/monitoring.component';
     EmailWarningComponent,
     FeedbackComponent,
     NetZeroComponent,
-    MonitoringComponent
+    MonitoringComponent,
+    TariffComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,12 @@
+<div class="tariff-section">
+    <div class="row row-cols-3 g-4">
+        <div class="col" *ngFor="let section of meterData">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <h5>{{section.reading}}</h5>
+                    <p>{{section.title}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
