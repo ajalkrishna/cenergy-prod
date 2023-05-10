@@ -149,11 +149,6 @@ export class UsageComponent implements OnInit {
       });
   }
 
-
-
-
-
-
   getMonthlyData() {
     this.barDate = [];
     this.barReading = [];
@@ -172,12 +167,12 @@ export class UsageComponent implements OnInit {
           this.barPoundRate.push(Number((each.primaryValue * 0.15 + 9).toFixed(2)));
         }
 
-        this.chosenReading.readingDate = this.months[Number(this.dayWiseResponse[0].timestamp.split("-")[1]) - 1]+", "+this.dayWiseResponse[0].timestamp.split("-")[0];
+        this.chosenReading.readingDate = this.months[Number(this.dayWiseResponse[0].timestamp.split("-")[1]) - 1] + ", " + this.dayWiseResponse[0].timestamp.split("-")[0];
         this.dailyConsumption = 0;
-        this.barReading.forEach(val =>this.dailyConsumption += val);
-        this.dailyConsumption=this.dailyConsumption.toFixed(2)
+        this.barReading.forEach(val => this.dailyConsumption += val);
+        this.dailyConsumption = this.dailyConsumption.toFixed(2)
         this.tariffInPounds = 0;
-        this.barPoundRate.forEach(val =>this.tariffInPounds += val);
+        this.barPoundRate.forEach(val => this.tariffInPounds += val);
         this.tariffInPounds = this.tariffInPounds.toFixed(2)
 
 
@@ -192,17 +187,13 @@ export class UsageComponent implements OnInit {
   }
 
   toggleType(e) {
-    this.showYesterdayCheck = false;
     this.selection = e.target.value;
     if (this.showMonth && this.disableYesterday) {
       this.displayBarGraphBasedOnType()
     } else {
+      this.showYesterdayCheck = false;
       this.displayGraphBasedOnType();
-
     }
-
-
-
   }
   displayBarGraphBasedOnType() {
     if (this.selection == "pounds") {
@@ -217,6 +208,8 @@ export class UsageComponent implements OnInit {
   }
 
   displayGraphBasedOnType() {
+    console.log(this.showYesterdayCheck);
+    
     if (this.selection == "pounds") {
       this.toggleReadingDisplayed = false;
       this.poundArray = []
@@ -230,8 +223,6 @@ export class UsageComponent implements OnInit {
       this.tariffInPounds = Number(tarriffInPounds.toFixed(2));
       this.chart.destroy();
       this.makeTheChart(this.listOfLabel, this.poundArray, 'Consumption In P', 0.04, 'P');
-      // this.chart.data.datasets[0].data = this.poundArray;
-      // this.chart.update()
     } else {
       this.toggleReadingDisplayed = true;
       // this.chart.data.datasets[0].data = this.readingFromMeter;
@@ -396,35 +387,6 @@ export class UsageComponent implements OnInit {
     }
   }
 
-  // addOne(id) {
-  //   // this.listOfLabel.push('dummy');
-  //   let labels = ['10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30']
-  //   let data = [8.9, 10.4, 9.5, 8.8, 8.7, 8.6, 8.7, 8.8, 9.4, 9.4, 9.3, 9.1, 7.1, 4, 2.5, 2, 1.9, 1.9, 1.9, 1.9, 2, 2, 1.9, 2, 1.9, 1.9, 2.1, 2]
-  //   if (id == labels.length) {
-  //     clearInterval(this.realtimeCounter);
-  //     return;
-  //   }
-  //   if (data[id] > 9) {
-  //     let consumption = {
-  //       time: labels[id],
-  //       value: data[id],
-  //       excess: (data[id] - 9).toFixed(1)
-  //     }
-  //     this.excessConsumption.push(consumption)
-  //   }
-  //   // this.listOfLabel.push(labels[id])
-  //   this.dataList.push(data[id])
-  //   this.dailyConsumption += Math.ceil(data[id]);
-  //   this.excessUsage = this.dailyConsumption - this.totalThreshold;
-  //   if (this.dailyConsumption == this.totalThreshold) {
-  //     this.warningMessage = true;
-  //     setTimeout(() => {
-  //       this.warningMessage = false;
-  //       this.warningIcon = true;
-  //     }, 5000);
-  //   }
-  //   this.chart.update();
-  // }
   closeWarning() {
     this.warningMessage = false;
   }
@@ -442,10 +404,6 @@ export class UsageComponent implements OnInit {
     }
   }
 
-
-
-
-
   calculateTotalConsumption() {
     this.dailyConsumption = 0;
     for (let reading of this.readingFromMeter) {
@@ -454,17 +412,12 @@ export class UsageComponent implements OnInit {
     this.dailyConsumption = Number(this.dailyConsumption.toFixed(2));
   }
 
-
-
   toggleEnergyTab() {
     this.energyTabStatus = !this.energyTabStatus;
   }
 
 
   showYesterday(e) {
-    const date = new Date('2019-05-15');
-    console.log(date.getMonth());
-
     if (e.target.checked) {
       let yesterdayDataset;
 
@@ -492,8 +445,9 @@ export class UsageComponent implements OnInit {
       this.chart.data.datasets.push(yesterdayDataset)
     }
     else {
-
-      this.chart.data.datasets.pop();
+      if (this.chart.data.datasets.length > 1) {
+        this.chart.data.datasets.pop();
+      }
     }
     this.chart.update();
   }
