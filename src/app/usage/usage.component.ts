@@ -169,9 +169,8 @@ export class UsageComponent implements OnInit {
         for (const each of this.dayWiseResponse) {
           this.barDate.push(each.timestamp.split("-")[2]);
           this.barReading.push(each.primaryValue)
-          this.barPoundRate.push(each.primaryValue * 0.15 + 9);
+          this.barPoundRate.push(Number((each.primaryValue * 0.15 + 9).toFixed(2)));
         }
-        // console.log(Number(this.dayWiseResponse[0].timestamp.split("-")[1]));
 
         this.chosenReading.readingDate = this.months[Number(this.dayWiseResponse[0].timestamp.split("-")[1]) - 1]+", "+this.dayWiseResponse[0].timestamp.split("-")[0];
         this.dailyConsumption = 0;
@@ -382,7 +381,7 @@ export class UsageComponent implements OnInit {
   showResults() {
     this.disableYesterday = true;
     if (this.showDate) {
-      this.showDate=false;
+      // this.showDate=false;
       let start = this.formattedDate + "0000"
       let end = this.formattedDate + "2330"
       this.url = `https://api-v2-sandbox.data.n3rgy.com/mpxn/2234567891000/utility/electricity/readingtype/consumption?start=${start}&end=${end}&granularity=halfhour&outputFormat=json`
