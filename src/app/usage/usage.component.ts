@@ -109,6 +109,7 @@ export class UsageComponent implements OnInit {
   showYesterdayCheck: boolean = false;
   barPoundRate: number[] = [];
   months: string[] = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  consumptionIn2018 =[572.02, 484.54, 523.57, 518.39, 507.47, 476.49, 559.8, 533.67, 421.68, 512.63, 544.18, 558.02]
   ngOnInit(): void {
     // this.meterReadings = this.reading.meterReadings;
     // this.readingTime = this.reading.readingTime;
@@ -199,7 +200,7 @@ export class UsageComponent implements OnInit {
     if (this.selection == "pounds") {
       this.toggleReadingDisplayed = false;
       this.chart.destroy();
-      this.createBarChartOfMonthlyConsumption(this.barDate, this.barPoundRate, 'Consumption in P', 'P')
+      this.createBarChartOfMonthlyConsumption(this.barDate, this.barPoundRate, 'Consumption in £', '£')
     } else {
       this.toggleReadingDisplayed = true;
       this.chart.destroy();
@@ -222,11 +223,9 @@ export class UsageComponent implements OnInit {
 
       this.tariffInPounds = Number(tarriffInPounds.toFixed(2));
       this.chart.destroy();
-      this.makeTheChart(this.listOfLabel, this.poundArray, 'Consumption In P', 0.04, 'P');
+      this.makeTheChart(this.listOfLabel, this.poundArray, 'Consumption In £', 0.04, '£');
     } else {
       this.toggleReadingDisplayed = true;
-      // this.chart.data.datasets[0].data = this.readingFromMeter;
-      // this.chart.update()
       this.chart.destroy();
       this.makeTheChart(this.listOfLabel, this.readingFromMeter, 'Consumptions in kWh', 0.4, 'kWh');
 
