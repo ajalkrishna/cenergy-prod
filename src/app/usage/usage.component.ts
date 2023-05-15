@@ -109,7 +109,11 @@ export class UsageComponent implements OnInit {
   showYesterdayCheck: boolean = false;
   barPoundRate: number[] = [];
   months: string[] = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  consumptionIn2018 =[572.02, 484.54, 523.57, 518.39, 507.47, 476.49, 559.8, 533.67, 421.68, 512.63, 544.18, 558.02]
+  consumptionIn2018 = [572.02, 484.54, 523.57, 518.39, 507.47, 476.49, 559.8, 533.67, 421.68, 512.63, 544.18, 558.02];
+  yearWiseConsumption: any;
+  yearWiseConsumptionInPounds: any[] = [];
+  chosenYear: any;
+  lastUpdateStatus:boolean = true;
   ngOnInit(): void {
     // this.meterReadings = this.reading.meterReadings;
     // this.readingTime = this.reading.readingTime;
@@ -169,19 +173,15 @@ export class UsageComponent implements OnInit {
         }
 
         this.chosenReading.readingDate = this.months[Number(this.dayWiseResponse[0].timestamp.split("-")[1]) - 1] + ", " + this.dayWiseResponse[0].timestamp.split("-")[0];
-        this.dailyConsumption = 0;
-        this.barReading.forEach(val => this.dailyConsumption += val);
-        this.dailyConsumption = this.dailyConsumption.toFixed(2)
-        this.tariffInPounds = 0;
-        this.barPoundRate.forEach(val => this.tariffInPounds += val);
-        this.tariffInPounds = this.tariffInPounds.toFixed(2)
+
+        this.updateConsumptionValue(this.barReading, this.barPoundRate);
 
 
         if (this.selection == 'pounds') {
           this.displayBarGraphBasedOnType();
         } else {
           this.chart.destroy();
-          this.createBarChartOfMonthlyConsumption(this.barDate, this.barReading, 'Consumption in kWh', 'kWh');
+          this.createBarChartOfMonthlyConsumption(this.barDate, this.barReading, 'Consumption in kWh', 'kWh', 20);
         }
 
       })
@@ -191,7 +191,10 @@ export class UsageComponent implements OnInit {
     this.selection = e.target.value;
     if (this.showMonth && this.disableYesterday) {
       this.displayBarGraphBasedOnType()
-    } else {
+    } else if (this.showYear && this.disableYesterday) {
+      this.displayYearwiseBarGraphBasedOnType();
+    }
+    else {
       this.showYesterdayCheck = false;
       this.displayGraphBasedOnType();
     }
@@ -200,17 +203,29 @@ export class UsageComponent implements OnInit {
     if (this.selection == "pounds") {
       this.toggleReadingDisplayed = false;
       this.chart.destroy();
-      this.createBarChartOfMonthlyConsumption(this.barDate, this.barPoundRate, 'Consumption in £', '£')
+      this.createBarChartOfMonthlyConsumption(this.barDate, this.barPoundRate, 'Consumption in £', '£', 10)
     } else {
       this.toggleReadingDisplayed = true;
       this.chart.destroy();
-      this.createBarChartOfMonthlyConsumption(this.barDate, this.barReading, 'Consumption in kWh', 'kWh')
+      this.createBarChartOfMonthlyConsumption(this.barDate, this.barReading, 'Consumption in kWh', 'kWh', 20)
+    }
+  }
+
+  displayYearwiseBarGraphBasedOnType() {
+    if (this.selection == "pounds") {
+      this.toggleReadingDisplayed = false;
+      this.chart.destroy();
+      this.createBarChartOfYearlyConsumption(this.yearWiseConsumptionInPounds, "Consumption In £", "£", 20)
+
+    } else {
+      this.toggleReadingDisplayed = true;
+      this.chart.destroy();
+      this.createBarChartOfYearlyConsumption(this.yearWiseConsumption.reading, "Consumption In kWh", "kWh", 400)
     }
   }
 
   displayGraphBasedOnType() {
-    console.log(this.showYesterdayCheck);
-    
+
     if (this.selection == "pounds") {
       this.toggleReadingDisplayed = false;
       this.poundArray = []
@@ -228,8 +243,6 @@ export class UsageComponent implements OnInit {
       this.toggleReadingDisplayed = true;
       this.chart.destroy();
       this.makeTheChart(this.listOfLabel, this.readingFromMeter, 'Consumptions in kWh', 0.4, 'kWh');
-
-
     }
   }
 
@@ -370,6 +383,7 @@ export class UsageComponent implements OnInit {
 
   showResults() {
     this.disableYesterday = true;
+    this.lastUpdateStatus = false;
     if (this.showDate) {
       // this.showDate=false;
       let start = this.formattedDate + "0000"
@@ -384,6 +398,26 @@ export class UsageComponent implements OnInit {
       this.urlDay = `https://api-v2-sandbox.data.n3rgy.com/mpxn/2234567891000/utility/electricity/readingtype/consumption?start=${start}&end=${end}&granularity=day&outputFormat=json`
       this.getMonthlyData();
     }
+
+    if (this.showYear) {
+      this.updateConsumptionValue(this.yearWiseConsumption.reading, this.yearWiseConsumptionInPounds)
+      this.chosenReading.readingDate = this.chosenYear;
+      this.chart.destroy();
+      if (this.selection == "pounds") {
+        this.createBarChartOfYearlyConsumption(this.yearWiseConsumptionInPounds, "Consumption In £", "£", 20)
+      } else {
+        this.createBarChartOfYearlyConsumption(this.yearWiseConsumption.reading, "Consumption In kWh", "kWh", 400)
+      }
+    }
+  }
+
+  updateConsumptionValue(kwhReading, poundReading) {
+    this.dailyConsumption = 0;
+    kwhReading.forEach(val => this.dailyConsumption += val);
+    this.dailyConsumption = this.dailyConsumption.toFixed(2)
+    this.tariffInPounds = 0;
+    poundReading.forEach(val => this.tariffInPounds += val);
+    this.tariffInPounds = this.tariffInPounds.toFixed(2)
   }
 
   closeWarning() {
@@ -410,6 +444,8 @@ export class UsageComponent implements OnInit {
     }
     this.dailyConsumption = Number(this.dailyConsumption.toFixed(2));
   }
+
+  // calculate
 
   toggleEnergyTab() {
     this.energyTabStatus = !this.energyTabStatus;
@@ -451,7 +487,7 @@ export class UsageComponent implements OnInit {
     this.chart.update();
   }
 
-  createBarChartOfMonthlyConsumption(barDate, barReading, yText, unit) {
+  createBarChartOfMonthlyConsumption(barDate, barReading, yText, unit, yStep) {
     this.chart = new Chart('acquisitions', {
       type: 'bar',
       data: {
@@ -484,7 +520,7 @@ export class UsageComponent implements OnInit {
               text: yText
             },
             ticks: {
-              stepSize: 15
+              stepSize: yStep
             }
 
           },
@@ -547,11 +583,137 @@ export class UsageComponent implements OnInit {
     })
   }
 
+  createBarChartOfYearlyConsumption(barReading, yText, unit, yStep) {
+    this.chart = new Chart('acquisitions', {
+      type: 'bar',
+      data: {
+        labels: this.months,
+        datasets: [{
+          label: 'Consumption',
+          data: barReading,
+          borderWidth: 1,
+          // pointBackgroundColor: 'rgba(255, 0, 0)',
+          // pointRadius: 2,
+          pointStyle: false,
+          backgroundColor: 'rgba(1, 1, 201, 0.716)',
+          borderSkipped: true
+
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            border: {
+              color: 'rgba(0,0,90)'
+            },
+            grid: {
+              tickColor: 'rgba(0,0,90'
+            },
+            title: {
+              color: 'darkblue',
+              display: true,
+              text: yText
+            },
+            ticks: {
+              stepSize: yStep
+            }
+
+          },
+          x: {
+            border: {
+              color: 'rgba(0,0,90)'
+            },
+            grid: {
+              // color:'transparent'
+              display: false,
+              tickColor: 'rgba(0,0,90)'
+
+            },
+            title: {
+              color: 'darkblue',
+              display: true,
+              text: 'Months'
+            }
+          }
+        },
+        // animation: false,
+        plugins: {
+          legend: {
+            display: true,
+            align: "end",
+            labels: {
+              boxHeight: 2,
+              boxWidth: 30,
+              color: 'black'
+            }
+          },
+          tooltip: {
+            // enabled:false
+            backgroundColor: 'rgba(255, 255, 255)',
+            titleColor: '#000',
+            bodyColor: '#000',
+            borderWidth: 1,
+            borderColor: '#000',
+            mode: 'index',
+            boxHeight: 1,
+            boxPadding: 2,
+            padding: 4,
+            intersect: false,
+            callbacks: {
+              label: function (context) {
+                let label = context.dataset.label || '';
+
+                if (label) {
+                  label += ': ';
+                }
+                if (context.parsed.y !== null) {
+                  label += context.parsed.y + unit;
+                }
+                return label;
+              }
+            }
+          }
+        }
+      }
+    })
+  }
+
   resetToPresent() {
+
     this.readingFromMeter = [];
     this.disableYesterday = !this.disableYesterday;
     this.url = `https://api-v2-sandbox.data.n3rgy.com/mpxn/2234567891000/utility/electricity/readingtype/consumption?start=201905150000&end=201905152330&granularity=halfhour&outputFormat=json`
+    this.lastUpdateStatus=true;
     this.createChartForDay()
+  }
+
+  chooseYear(e) {
+    this.yearWiseConsumptionInPounds = [];
+    this.yearWiseConsumption = [
+      {
+        year: 2018,
+        reading: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 559.8]
+      },
+      {
+        year: 2019,
+        reading: [572.02, 484.54, 523.57, 518.39, 507.47, 0, 0, 0, 0, 0, 0, 0]
+      }
+    ]
+
+    this.yearWiseConsumption = this.yearWiseConsumption.find((each) => each.year == e.target.value);
+    this.chosenYear = e.target.value;
+    // console.log(this.yearWiseConsumption);
+
+    this.yearWiseConsumption.reading.forEach((each) => {
+      if (each != 0) {
+        // let consolidated = each*0.09+9;
+        this.yearWiseConsumptionInPounds.push(Number((each * 0.09 + 9).toFixed(2)))
+      } else {
+        this.yearWiseConsumptionInPounds.push(each)
+      }
+    })
+
   }
 
 }

@@ -8,7 +8,7 @@
         <div class="basic_data border bg-light p-3" *ngIf="energyTabStatus">
             <p class="m-0 pb-2"><span class="text-secondary fw-bold">Site address: </span> Flat 29, Middlesex, UB2 4WLL
             </p>
-            <p class="m-0"><span class="text-secondary fw-bold">Meter Serial Number: </span> ASED-ADERC-9856-E453</p>
+            <p class="m-0"><span class="text-secondary fw-bold">Meter Serial Number: </span> 26-00-00-00-00-00-02-01</p>
         </div>
         <div class="p-3" *ngIf="energyTabStatus">
             <app-consumption-card></app-consumption-card>
@@ -83,7 +83,6 @@
                 
                 <div class="consumptionChart">
                     <canvas id="acquisitions"></canvas>
-                    <!-- <div class="thresholdLine text-end">Threshold<i class="fa-regular fa-pen-to-square ms-2"></i></div> -->
                 </div>
             </div>
         </div>
@@ -125,7 +124,8 @@
 
                     <div class="mb-3 year-pick" *ngIf="showYear">
                         <label>Choose Year</label>
-                        <select class="form-select">
+                        <select class="form-select" (input)="chooseYear($event)">
+                            <option>Select</option>
                             <option>2019</option>
                             <option>2018</option>
                         </select>
