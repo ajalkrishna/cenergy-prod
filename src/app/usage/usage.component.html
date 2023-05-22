@@ -12,7 +12,7 @@
         </div>
         <div class="p-3" *ngIf="energyTabStatus">
             <app-consumption-card></app-consumption-card>
-            
+
 
         </div>
 
@@ -36,16 +36,7 @@
                         </div>
 
                     </div>
-                    <div class="col-6 d-flex">
-                        <h5 class="ms-auto alert_pop" *ngIf="warningMessage"> You have consumed more units of power than
-                            yesterday!!
-                            <span (click)="closeWarning()"><i
-                                    class="fa-solid fa-circle-xmark text-danger ms-1"></i></span>
-                        </h5>
-                        <button class="btn warninBtn d-block ms-auto" data-bs-toggle="modal"
-                            data-bs-target="#warningModal" *ngIf="warningIcon">Important Notification <i
-                                class="fa-solid fa-triangle-exclamation"></i></button>
-                    </div>
+                    
                 </div>
                 <!-- <hr> -->
                 <div class="d-flex justify-content-between">
@@ -67,20 +58,20 @@
                     </div>
                     <div class="d-flex justify-content-end pt-2">
                         <div class="see-past-con me-3 d-flex" *ngIf="!disableYesterday">
-                            <input type="checkbox" class="form-check me-2" (input)="showYesterday($event)" [checked]="showYesterdayCheck">
+                            <input type="checkbox" class="form-check me-2" (input)="showYesterday($event)"
+                                [checked]="showYesterdayCheck">
                             <p class="m-0">Compare with yesterday</p>
                         </div>
                         <div class="see-past-con me-3" *ngIf="disableYesterday">
                             <p class="m-0" (click)="resetToPresent()">Present Day</p>
                         </div>
-                        <div class="see-past-con text-end" data-bs-toggle="modal"
-                            data-bs-target="#timelineModal">
+                        <div class="see-past-con text-end" data-bs-toggle="modal" data-bs-target="#timelineModal">
                             See past consumption
                         </div>
                     </div>
-    
+
                 </div>
-                
+
                 <div class="consumptionChart">
                     <canvas id="acquisitions"></canvas>
                 </div>
@@ -133,49 +124,16 @@
                     <div class="timeline-buttons d-flex">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button class="btn btn-primary d-block ms-auto" *ngIf="displayShowResultsButton"
-                            (click)="showResults()" data-bs-dismiss="modal">Show
-                            Results</button>
+                            (click)="showResults()" data-bs-dismiss="modal"
+                            [disabled]="showYear && yearWiseConsumption.length!=12"><img
+                                *ngIf="chosenYear!=undefined && yearWiseConsumption.length!=12"
+                                src="../../assets/22.gif" width="20px">
+                            Show Results
+                        </button>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="warningModal" data-bs-backdrop="static" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content bg-light">
-            <div class="modal-body p-4">
-                <h6 class="fw-bold">Dear Consumer,</h6>
-                <p class="m-0 mt-2">You have consumed <span class="fw-bold text-danger">{{excessUsage}}kWh</span> more
-                    electricity than
-                    yesterday!!</p>
-                <table class="table mt-3 text-center mx-auto table-bordered warning-table"
-                    *ngIf="excessConsumption.length!=0">
-                    <thead class="thead">
-                        <tr>
-                            <th colspan="3">Half-hourly consumption exceeded threshold (9kWh) </th>
-                        </tr>
-                        <tr>
-                            <th>Time</th>
-                            <th>Consumption(kWh)</th>
-                            <th>Excess Consumption(kWh)</th>
-                        </tr>
-                    </thead>
-                    <tbody class="tbody">
-                        <tr *ngFor="let reading of excessConsumption">
-                            <td>{{reading.time}}</td>
-                            <td>{{reading.value}}</td>
-                            <td>{{reading.excess}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <p class="fst-italic pop-tip">*above report has sent to your registered email-id</p>
-                <h6 class="text-danger close-modal" data-bs-dismiss="modal">Close</h6>
-            </div>
-        </div>
-    </div>
-</div>

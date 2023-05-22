@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { ReadingService } from '../reading.service';
+import { ConsumptionApiService } from '../consumption-api.service';
 Chart.register(...registerables);
 
 @Component({
@@ -10,87 +11,28 @@ Chart.register(...registerables);
 })
 export class UsageComponent implements OnInit {
 
-  constructor(private reading: ReadingService) { }
+  constructor(private reading: ReadingService, private api: ConsumptionApiService) { }
 
 
   listOfLabel: string[] = ['0:00', '0:30', '1:00', '1:30', '2:00', '2:30', '3:00', '3:30', '4:00', '4:30', '5:00', '5:30', '6:00', '6:30', '7:00', '7:30', '8:00', '8:30', '9:00', '9:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30']
-  dataList: number[] = [2.2, 3.9, 4, 4, 4.2, 4, 4.2, 4, 4.5, 1.9, 2.9, 1.8, 7.6, 7.1, 7.9, 8.5, 10.2, 10.1, 9.9, 10.3];
   meterReadings: any;
   chosenReading: any = {
     readingDate: ''
   }
-  readingTime: any;
   chart: any;
   dailyConsumption: any;
   tariffInPounds: any = 0;
-  counter: number = 0;
-  realtimeCounter: any
-  readingOption: boolean = false;
   warningMessage: boolean = false;
-  warningIcon: boolean = false;
+  //warningIcon: boolean = false;
   energyTabStatus: boolean = true;
-  dateArray: any[] = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
-  yearArray: any[] = ['2021', '2020', '2019'];
-  // monthArray: any[] = [
-  //   {
-  //     month: 'January',
-  //     code: '01'
-  //   },
-  //   {
-  //     month: 'February',
-  //     code: '02'
-  //   },
-  //   {
-  //     month: 'March',
-  //     code: '03'
-  //   },
-  //   {
-  //     month: 'April',
-  //     code: '04'
-  //   },
-  //   {
-  //     month: 'May',
-  //     code: '05'
-  //   },
-  //   {
-  //     month: 'June',
-  //     code: '06'
-  //   },
-  //   {
-  //     month: 'July',
-  //     code: '07'
-  //   },
-  //   {
-  //     month: 'August',
-  //     code: '08'
-  //   },
-  //   {
-  //     month: 'September',
-  //     code: '09'
-  //   },
-  //   {
-  //     month: 'October',
-  //     code: '10'
-  //   },
-  //   {
-  //     month: 'November',
-  //     code: '11'
-  //   },
-  //   {
-  //     month: 'December',
-  //     code: '12'
-  //   },
-  // ];
   yesterdayDataInkWh: number[] = [0.323, 0.297, 0.344, 0.315, 0.402, 0.367, 0.366, 0.353, 0.398, 0.326, 0.417, 0.355, 0.351, 0.324, 0.275, 0.276, 0.452, 0.358, 0.309, 0.379, 0.363, 0.452, 0.555, 0.358, 0.423, 0.456, 0.477, 0.409, 0.391, 0.45, 0.412, 0.437, 0.4, 0.432, 0.733, 0.481, 0.463, 0.966, 0.943, 0.492, 0.951, 0.564, 0.471, 1.055, 0.497, 0.294, 0.253, 0.26]
-  excessConsumption: any[] = [];
-  pastReadingToggle: boolean = true;
-  totalThreshold: number = 236;
-  excessUsage: number = 0;
-  consumptionInPounds: any[] = []
+  //excessConsumption: any[] = [];
+  //pastReadingToggle: boolean = true;
+  //totalThreshold: number = 236;
+  //excessUsage: number = 0;
+  //consumptionInPounds: any[] = []
   readingFromMeter: any[] = []
-  url: string = 'https://api-v2-sandbox.data.n3rgy.com/mpxn/2234567891000/utility/electricity/readingtype/consumption?start=201905150000&end=201905152330&granularity=halfhour&outputFormat=json';
-  urlDay: string = 'https://api-v2-sandbox.data.n3rgy.com/mpxn/2234567891000/utility/electricity/readingtype/consumption?start=201812250000&end=201903162330&granularity=day&outputFormat=json'
-  dateList: string[] = [];
+  //dateList: string[] = [];
   dayWiseResponse: any;
   poundArray: any[] = [];
   displayShowResultsButton: boolean = false;
@@ -110,84 +52,92 @@ export class UsageComponent implements OnInit {
   barPoundRate: number[] = [];
   months: string[] = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   consumptionIn2018 = [572.02, 484.54, 523.57, 518.39, 507.47, 476.49, 559.8, 533.67, 421.68, 512.63, 544.18, 558.02];
-  yearWiseConsumption: any;
+  yearWiseConsumption: any = [];
   yearWiseConsumptionInPounds: any[] = [];
   chosenYear: any;
-  lastUpdateStatus:boolean = true;
+  lastUpdateStatus: boolean = true;
+  monthArrayOfChosenYear: any[] = []
+  readingArrayOfChosenYear: any[] = []
+
   ngOnInit(): void {
-    // this.meterReadings = this.reading.meterReadings;
-    // this.readingTime = this.reading.readingTime;
     this.makeTheChart(this.listOfLabel, this.readingFromMeter, 'Consumptions in kWh', 0.4, 'kWh');
-    // this.updateChart();
-    this.createChartForDay();
+    this.createChartForDay({ start: 201905150000, end: 201905152330, granularity: 'halfhour' });
   }
 
 
 
-  createChartForDay() {
-    fetch(this.url, {
-      headers: {
-        "x-api-key": "d388dc30-7562-4835-a21f-93eee1515cbe"
+  createChartForDay(input) {
+    this.api.getConsumption(input).subscribe((data) => {
+      this.responseOfSelectedDay = data;
+      this.chosenReading.readingDate = this.responseOfSelectedDay.devices[0].values[0].timestamp.split(" ")[0];
+      for (const each of data.devices[0].values) {
+        this.readingFromMeter.push(each.primaryValue);
       }
+      if (this.selection == 'pounds') {
+        this.displayGraphBasedOnType();
+
+      } else {
+        this.chart.destroy();
+        this.makeTheChart(this.listOfLabel, this.readingFromMeter, 'Consumptions in kWh', 0.4, 'kWh');
+
+
+      }
+      this.chart.data.datasets[0].label = this.chosenReading.readingDate;
+      this.calculateTotalConsumption()
     })
-      .then(res => res.json())
-      .then(data => {
-        this.responseOfSelectedDay = data;
-        this.chosenReading.readingDate = this.responseOfSelectedDay.devices[0].values[0].timestamp.split(" ")[0];
-        for (const each of data.devices[0].values) {
-          this.readingFromMeter.push(each.primaryValue);
-        }
-        if (this.selection == 'pounds') {
-          this.displayGraphBasedOnType();
+    // fetch(this.url, {
+    //   headers: {
+    //     "x-api-key": "d388dc30-7562-4835-a21f-93eee1515cbe"
+    //   }
+    // })
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     this.responseOfSelectedDay = data;
+    //     this.chosenReading.readingDate = this.responseOfSelectedDay.devices[0].values[0].timestamp.split(" ")[0];
+    //     for (const each of data.devices[0].values) {
+    //       this.readingFromMeter.push(each.primaryValue);
+    //     }
+    //     if (this.selection == 'pounds') {
+    //       this.displayGraphBasedOnType();
 
-        } else {
-          // this.chart.data.datasets[0].data = this.readingFromMeter;
-          this.chart.destroy();
-          this.makeTheChart(this.listOfLabel, this.readingFromMeter, 'Consumptions in kWh', 0.4, 'kWh');
+    //     } else {
+    //       // this.chart.data.datasets[0].data = this.readingFromMeter;
+    //       this.chart.destroy();
+    //       this.makeTheChart(this.listOfLabel, this.readingFromMeter, 'Consumptions in kWh', 0.4, 'kWh');
 
 
-        }
-        this.chart.data.datasets[0].label = this.chosenReading.readingDate;
-        this.calculateTotalConsumption()
-        // this.chart.update()
+    //     }
+    //     this.chart.data.datasets[0].label = this.chosenReading.readingDate;
+    //     this.calculateTotalConsumption()
+    //     // this.chart.update()
 
-      });
+    //   });
   }
 
-  getMonthlyData() {
+  getMonthlyData(input) {
     this.barDate = [];
     this.barReading = [];
     this.barPoundRate = [];
-    fetch(this.urlDay, {
-      headers: {
-        "x-api-key": "d388dc30-7562-4835-a21f-93eee1515cbe"
+    this.api.getConsumption(input).subscribe((data) => {
+      this.dayWiseResponse = data.devices[0].values;
+      for (const each of this.dayWiseResponse) {
+        this.barDate.push(each.timestamp.split("-")[2]);
+        this.barReading.push(each.primaryValue)
+        this.barPoundRate.push(Number((each.primaryValue * 0.15 + 9).toFixed(2)));
+      }
+      this.chosenReading.readingDate = this.months[Number(this.dayWiseResponse[0].timestamp.split("-")[1]) - 1] + ", " + this.dayWiseResponse[0].timestamp.split("-")[0];
+      this.updateConsumptionValue(this.barReading, this.barPoundRate);
+      if (this.selection == 'pounds') {
+        this.displayBarGraphBasedOnType();
+      } else {
+        this.chart.destroy();
+        this.createBarChartOfMonthlyConsumption(this.barDate, this.barReading, 'Consumption in kWh', 'kWh', 20);
       }
     })
-      .then(res => res.json())
-      .then(data => {
-        this.dayWiseResponse = data.devices[0].values;
-        for (const each of this.dayWiseResponse) {
-          this.barDate.push(each.timestamp.split("-")[2]);
-          this.barReading.push(each.primaryValue)
-          this.barPoundRate.push(Number((each.primaryValue * 0.15 + 9).toFixed(2)));
-        }
-
-        this.chosenReading.readingDate = this.months[Number(this.dayWiseResponse[0].timestamp.split("-")[1]) - 1] + ", " + this.dayWiseResponse[0].timestamp.split("-")[0];
-
-        this.updateConsumptionValue(this.barReading, this.barPoundRate);
-
-
-        if (this.selection == 'pounds') {
-          this.displayBarGraphBasedOnType();
-        } else {
-          this.chart.destroy();
-          this.createBarChartOfMonthlyConsumption(this.barDate, this.barReading, 'Consumption in kWh', 'kWh', 20);
-        }
-
-      })
   }
 
   toggleType(e) {
+
     this.selection = e.target.value;
     if (this.showMonth && this.disableYesterday) {
       this.displayBarGraphBasedOnType()
@@ -220,7 +170,7 @@ export class UsageComponent implements OnInit {
     } else {
       this.toggleReadingDisplayed = true;
       this.chart.destroy();
-      this.createBarChartOfYearlyConsumption(this.yearWiseConsumption.reading, "Consumption In kWh", "kWh", 400)
+      this.createBarChartOfYearlyConsumption(this.yearWiseConsumption, "Consumption In kWh", "kWh", 400)
     }
   }
 
@@ -377,7 +327,6 @@ export class UsageComponent implements OnInit {
   chooseMonth(e) {
     let month = e.target.value;
     this.formattedMonth = month.replace("-", "")
-
   }
 
 
@@ -385,28 +334,24 @@ export class UsageComponent implements OnInit {
     this.disableYesterday = true;
     this.lastUpdateStatus = false;
     if (this.showDate) {
-      // this.showDate=false;
       let start = this.formattedDate + "0000"
       let end = this.formattedDate + "2330"
-      this.url = `https://api-v2-sandbox.data.n3rgy.com/mpxn/2234567891000/utility/electricity/readingtype/consumption?start=${start}&end=${end}&granularity=halfhour&outputFormat=json`
-      this.createChartForDay()
+      this.createChartForDay({ start: start, end: end, granularity: 'halfhour' })
     }
     if (this.showMonth) {
-      // this.showMonth=false;
       let start = this.formattedMonth + "010030";
       let end = this.formattedMonth + "310000"
-      this.urlDay = `https://api-v2-sandbox.data.n3rgy.com/mpxn/2234567891000/utility/electricity/readingtype/consumption?start=${start}&end=${end}&granularity=day&outputFormat=json`
-      this.getMonthlyData();
+      this.getMonthlyData({ start: start, end: end, granularity: 'day' });
     }
 
     if (this.showYear) {
-      this.updateConsumptionValue(this.yearWiseConsumption.reading, this.yearWiseConsumptionInPounds)
+      this.updateConsumptionValue(this.yearWiseConsumption, this.yearWiseConsumptionInPounds)
       this.chosenReading.readingDate = this.chosenYear;
       this.chart.destroy();
       if (this.selection == "pounds") {
         this.createBarChartOfYearlyConsumption(this.yearWiseConsumptionInPounds, "Consumption In £", "£", 20)
       } else {
-        this.createBarChartOfYearlyConsumption(this.yearWiseConsumption.reading, "Consumption In kWh", "kWh", 400)
+        this.createBarChartOfYearlyConsumption(this.yearWiseConsumption, "Consumption In kWh", "kWh", 400)
       }
     }
   }
@@ -424,18 +369,6 @@ export class UsageComponent implements OnInit {
     this.warningMessage = false;
   }
 
-  setupLabelAndData(date) {
-    this.chosenReading = this.meterReadings.find(obj => obj.readingDate == date);
-    let reading = this.chosenReading;
-    for (const key in reading) {
-      if (key == 'readingDate' || key == 'date' || key == 'month' || key == 'year' || key == 'accountNumber' || key == 'mpxn') {
-        continue
-      } else {
-        this.listOfLabel.push(this.readingTime[key]);
-      }
-      this.dataList.push(reading[key]);
-    }
-  }
 
   calculateTotalConsumption() {
     this.dailyConsumption = 0;
@@ -445,7 +378,6 @@ export class UsageComponent implements OnInit {
     this.dailyConsumption = Number(this.dailyConsumption.toFixed(2));
   }
 
-  // calculate
 
   toggleEnergyTab() {
     this.energyTabStatus = !this.energyTabStatus;
@@ -592,8 +524,6 @@ export class UsageComponent implements OnInit {
           label: 'Consumption',
           data: barReading,
           borderWidth: 1,
-          // pointBackgroundColor: 'rgba(255, 0, 0)',
-          // pointRadius: 2,
           pointStyle: false,
           backgroundColor: 'rgba(1, 1, 201, 0.716)',
           borderSkipped: true
@@ -683,37 +613,73 @@ export class UsageComponent implements OnInit {
 
     this.readingFromMeter = [];
     this.disableYesterday = !this.disableYesterday;
-    this.url = `https://api-v2-sandbox.data.n3rgy.com/mpxn/2234567891000/utility/electricity/readingtype/consumption?start=201905150000&end=201905152330&granularity=halfhour&outputFormat=json`
-    this.lastUpdateStatus=true;
-    this.createChartForDay()
+    this.lastUpdateStatus = true;
+    this.createChartForDay({ start: 201905150000, end: 201905152330, granularity: 'halfhour' })
   }
 
   chooseYear(e) {
-    this.yearWiseConsumptionInPounds = [];
-    this.yearWiseConsumption = [
-      {
-        year: 2018,
-        reading: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 559.8]
-      },
-      {
-        year: 2019,
-        reading: [572.02, 484.54, 523.57, 518.39, 507.47, 0, 0, 0, 0, 0, 0, 0]
-      }
-    ]
-
-    this.yearWiseConsumption = this.yearWiseConsumption.find((each) => each.year == e.target.value);
     this.chosenYear = e.target.value;
-    // console.log(this.yearWiseConsumption);
+    let yearWithMonth;
+    this.monthArrayOfChosenYear = []
+    this.readingArrayOfChosenYear = []
 
-    this.yearWiseConsumption.reading.forEach((each) => {
-      if (each != 0) {
-        // let consolidated = each*0.09+9;
-        this.yearWiseConsumptionInPounds.push(Number((each * 0.09 + 9).toFixed(2)))
+    for (let month = 1; month <= 12; month++) {
+      if (month < 10) {
+        yearWithMonth = this.chosenYear + "0" + month;
       } else {
-        this.yearWiseConsumptionInPounds.push(each)
+        yearWithMonth = this.chosenYear + month;
       }
-    })
+      let urlParamsData = {
+        start: yearWithMonth + "010030",
+        end: yearWithMonth + "312330",
+        granularity: 'day'
+      }
 
+      this.getYearWiseData(urlParamsData, month)
+    }
+  }
+
+  getYearWiseData(urlParams, month) {
+    let consumptionDataForGraph = [];
+    this.yearWiseConsumption = []
+    this.yearWiseConsumptionInPounds = []
+    this.api.getConsumption(urlParams).subscribe((data) => {
+      let consumption = 0;
+      if (data.devices[0]) {
+        consumption = this.findTotalConsumption(data.devices[0].values)
+      } else {
+        consumption = 0;
+      }
+
+      let sortedMonth = {
+        monthCode: month,
+        consumption: consumption
+      }
+
+      this.readingArrayOfChosenYear.push(sortedMonth);
+      this.readingArrayOfChosenYear.sort((first, second) => first.monthCode - second.monthCode);
+      this.readingArrayOfChosenYear.forEach((each) => consumptionDataForGraph.push(each.consumption))
+      this.yearWiseConsumption = consumptionDataForGraph
+      let poundArray = []
+      this.yearWiseConsumption.forEach((each) => {
+        if (each != 0) {
+          poundArray.push(Number((each * 0.09 + 9).toFixed(2)))
+
+        } else {
+          poundArray.push(each)
+
+        }
+        this.yearWiseConsumptionInPounds = poundArray;
+
+      })
+
+    })
+  }
+  findTotalConsumption(consumption) {
+    let sum = 0;
+    consumption.forEach((each) => sum += each.primaryValue)
+    sum = Number(sum.toFixed(2))
+    return sum;
   }
 
 }
